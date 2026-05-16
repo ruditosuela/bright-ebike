@@ -1,0 +1,3214 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* HOMEPAGE NAVIGATION */
+body {
+    padding-top: 7vw;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #6b0303;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0vw 2.5vw;
+    z-index: 1000;
+    height: 7vw;
+    font-weight: bold;
+}
+
+header img {
+    width: 7vw;
+    margin-left: 1vw;
+}
+
+nav {
+    width: 100%;
+}
+
+.navLinks ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin-right: 2vw;
+    gap: 2vw;
+}
+
+.navLinks a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1vw;
+    font-size: 1.5vw;
+
+}
+
+.navLinks a:hover {
+    color: #6b0303;
+    background-color: #fff;
+    border-radius: 5px;
+    transition: 0.2s;
+    padding: 5px;
+}
+
+.navLinks a.active {
+    color: #6b0303;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.Icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.Icons img {
+    width: 2rem;
+    height: auto;
+    cursor: pointer;
+}
+
+
+/* SEARCH  */
+.searchBar {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 0.06rem solid #CCCCCC;
+    border-radius: 0.3rem;
+    position: relative;
+}
+
+.searchBar img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.searchBar input {
+    border: none;
+    outline: none;
+    padding: 0.6rem;
+    width: 180px;
+}
+
+.searchResults {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-height: 250px;
+    overflow-y: auto;
+    display: none;
+    z-index: 9999;
+}
+
+/* SEARCH ITEMS */
+.searchItem {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.searchItem:hover {
+    background: #f2f2f2;
+}
+
+.searchItem p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.searchItem span {
+    font-size: 12px;
+    color: gray;
+}
+
+/* NEW SEARCH */
+/* SEARCH DROPDOWN */
+.searchBar {
+    position: relative;
+}
+
+.searchResults {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 320px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 9999;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.searchResultItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.searchResultItem:hover {
+    background: #f5f5f5;
+}
+
+.searchResultItem img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #f0f0f0;
+}
+
+.searchResultInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResultName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.searchResultPrice {
+    font-size: 0.8rem;
+    color: #6b0303;
+}
+
+.searchNoResult {
+    padding: 14px;
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* HIGHLIGHT E-BIKES */
+.ebike-card.highlighted {
+    outline: 3px solid #6b0303;
+    box-shadow: 0 0 16px rgba(77, 2, 2, 0.5);
+    transition: outline 0.3s, box-shadow 0.3s;
+}
+
+/* SHOPPING CART */
+.cartOverlay {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.cartWindow {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    width: 320px;
+    height: 420px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.cartTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #6b0303;
+    color: white;
+}
+
+.cartCloseBtn {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.cartContent {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.cartRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px;
+}
+
+.productCol {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.qtyCol {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+.label {
+    font-size: 12px;
+    color: #777;
+    font-weight: 600;
+}
+
+/* PRODUCT NAME + PRICE */
+.productName {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.price {
+    font-size: 13px;
+    color: #555;
+}
+
+.removeItem {
+    margin-left: 5px;
+    background: #6b0303;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.removeItem:hover {
+    background: #4d0202;
+}
+
+/* QUANTITY ADD MINUS BTN */
+.qtyControls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qtyControls button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: #6b0303;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.qtyControls span {
+    min-width: 25px;
+    text-align: center;
+}
+
+.cartTotalCheckout {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+}
+
+.cartTotalCheckout span {
+    padding-left: 5px;
+}
+
+.checkOutBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #6b0303;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.checkOutBtn:hover {
+    background: #4d0202;
+}
+
+.cartOverlay.active {
+    display: block;
+}
+
+.cartWindow.active {
+    display: flex;
+}
+
+.shoppingCart {
+    position: relative;
+    cursor: pointer;
+}
+
+.cartCount {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    display: none;
+}
+
+
+                                                                                    /* CHECKOUT PAGE */
+
+.modalOpen {
+    overflow: hidden;
+}
+ 
+/* Overlay */
+.checkoutModalOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1100;
+    backdrop-filter: blur(2px);
+}
+ 
+.checkoutModalOverlay.active {
+    display: block;
+}
+ 
+/* Modal container */
+.checkoutModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: 90%;
+    max-width: 860px;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    z-index: 1101;
+    overflow: hidden;
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+ 
+.checkoutModal.active {
+    display: flex;
+    flex-direction: column;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+ 
+/* Inner scroll wrapper */
+.checkoutModalInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+ 
+/* Header */
+.checkoutModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #6b0303;
+    color: #fff;
+    flex-shrink: 0;
+}
+ 
+.checkoutModalHeader h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+ 
+.checkoutModalClose {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    line-height: 1;
+    transition: color 0.2s;
+}
+ 
+.checkoutModalClose:hover {
+    color: #ffcccc;
+}
+ 
+/* Body — two-column layout */
+.checkoutModalBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+ 
+.checkoutModalLeft {
+    padding: 20px 20px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+ 
+.checkoutModalRight {
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+ 
+.checkoutSection {
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+ 
+.checkoutSection h3 {
+    margin: 0 0 10px;
+    font-size: 0.95rem;
+    color: #6b0303;
+    font-weight: 700;
+    border-bottom: 1px solid #e0b0b0;
+    padding-bottom: 6px;
+}
+ 
+.checkoutSection.userInfo p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.5;
+}
+ 
+.checkoutSection.userInfo a {
+    color: #6b0303;
+    font-weight: 600;
+}
+ 
+/* GCASH PANEL */
+.gcashPanel {
+    display: none;
+    background: #f9f9f9;
+    border: 1px solid #e0b0b0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    flex-direction: column;
+    gap: 10px;
+}
+ 
+.gcashPanel:not(.visible) {
+    display: none !important;
+}
+ 
+.gcashPanel.visible {
+    display: flex;
+}
+ 
+.gcashTitle {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #6b0303;
+    border-bottom: 1px solid #e0b0b0;
+    padding-bottom: 8px;
+    margin-bottom: 2px;
+}
+ 
+.gcashRefBox {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    color: #333;
+    line-height: 1.7;
+}
+ 
+.gcashPanel label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: -4px;
+}
+ 
+.gcashNumberInput {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: #222;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+ 
+.gcashNumberInput:focus {
+    border-color: #6b0303;
+}
+ 
+.openGcashBtn {
+    width: 100%;
+    padding: 11px 16px;
+    background-color: #00a2e6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background-color 0.2s, transform 0.15s;
+    margin-top: 2px;
+}
+ 
+.openGcashBtn:hover {
+    background-color: #0088c7;
+    transform: translateY(-1px);
+}
+ 
+.openGcashBtn:active {
+    transform: translateY(0);
+    background-color: #006fa3;
+}
+ 
+.gcashNote {
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.5;
+    margin: 0;
+}
+ 
+.checkoutSection.paymentMethod .paymentSelect {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #333;
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 4px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+ 
+.checkoutSection.paymentMethod .paymentSelect:focus {
+    border-color: #6b0303;
+}
+ 
+.checkoutHeader,
+.checkoutItem {
+    display: grid;
+    grid-template-columns: 2fr 0.6fr 1fr;
+    padding: 8px 4px;
+    align-items: center;
+    font-size: 0.82rem;
+}
+ 
+.checkoutHeader {
+    font-weight: 700;
+    border-bottom: 2px solid #6b0303;
+    margin-bottom: 6px;
+    color: #6b0303;
+}
+ 
+.checkoutItem {
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+}
+ 
+.checkoutItem:last-child {
+    border-bottom: none;
+}
+ 
+.checkoutItem span:last-child,
+.checkoutHeader span:last-child {
+    text-align: right;
+}
+ 
+.checkoutSection.summary {
+    margin-top: auto;
+}
+ 
+.checkoutSection.summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+    font-size: 0.88rem;
+    color: #333;
+}
+ 
+.checkoutSection.summary p strong {
+    font-size: 0.95rem;
+}
+ 
+#placeOrderBtn {
+    width: 100%;
+    padding: 13px 16px;
+    background-color: #6b0303;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.2s, transform 0.15s;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+ 
+#placeOrderBtn:hover {
+    background-color: #4d0202;
+    transform: translateY(-1px);
+}
+ 
+#placeOrderBtn:active {
+    transform: translateY(0);
+}
+
+                                                                                    /* AVATAR PROFILE  */
+.profileOverlay {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.profileWindow {
+    display: none;
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    width: 260px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.profileTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #6b0303;
+    color: white;
+}
+
+.profileCloseBtn {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.profileContent {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+}
+
+.loginBtn,
+.signupBtn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background-color: #6b0303;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.loginBtn:hover,
+.signupBtn:hover {
+    background-color: #4d0202;
+}
+
+.profileOverlay.active {
+    display: block;
+}
+
+.profileWindow.active {
+    display: flex;
+}
+
+/* ACCOUNT DETAILS */
+.accountContainer {
+    width: 420px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.accountContainer h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6b0303;
+}
+
+.accountInfo p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    font-size: 16px;
+}
+
+.accountInfo strong {
+    /* color: #6b0303; */
+    min-width: 120px;
+}
+
+.editableField input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.saveBtn,
+.backBtn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.saveBtn {
+    background-color: #27ae60;
+}
+
+.saveBtn:hover {
+    background-color: #1e8449;
+}
+
+.backBtn {
+    background: #6b0303;
+}
+
+.backBtn:hover {
+    background: #4d0202;
+}
+
+/* LOGIN */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.Login h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.email,
+.userName,
+.Password {
+    margin-bottom: 1rem;
+}
+
+.email input,
+.userName input,
+.Password input {
+    width: 250px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.checkboxPassword {
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+
+.LoginBTN {
+    width: 270px;
+    padding: 10px;
+    background-color: #6b0303;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.LoginBTN:hover {
+    background-color: #4d0202;
+    transform: scale(1.05);
+}
+
+.Register {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.Register a {
+    color: #6b0303;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* SIGNUP */
+/* HOMEPAGE CONTENT */
+
+.homepageBackground {
+    min-height: 100vh;
+    /* full screen height = consistent layout */
+    width: 100%;
+    /* height: 50vw; */
+    background:
+        linear-gradient(rgba(148, 2, 2, 0.432)),
+        url("assets/E-BikeNewReleasesCopy.jpg") center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+.welcomingSection {
+    color: #fff;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    /* height: 50%; */
+}
+
+.welcomingSection h1 {
+    font-size: 6vw;
+}
+
+.welcomingSection p {
+    font-size: 1.5vw;
+}
+
+/* FEATURED E-BIKES */
+.featuredE-Bikes {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.featuredCategory {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    margin-top: 1.3vw;
+}
+
+.featuredCategory div {
+    cursor: pointer;
+    font-size: 1.5rem;
+    background-color: #6b0303;
+    color: white;
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.featuredCategory div:hover,
+.featuredCategory div.TwoWheelerActive {
+    background-color: #6b0303c9;
+    opacity: 0.85;
+}
+
+.featuredCategory div.active {
+    background-color: #6b0303c9;
+    opacity: 0.85;
+}
+
+.TwoWheelsActiveDisplay,
+.ThreeWheelsDisplay,
+.FourWheelsDisplay {
+    margin-top: 2vw;
+    justify-content: center;
+    gap: 2vw;
+}
+
+
+.TwoWheelsActiveDisplay {
+    display: flex;
+}
+
+.ThreeWheelsDisplay,
+.FourWheelsDisplay {
+    display: none;
+}
+
+.featuredE-Bikes img {
+    width: 20vw;
+    transition: 0.2s;
+}
+
+.featuredE-Bikes img:hover {
+    transform: scale(1.05);
+}
+
+.arrowContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+}
+
+.arrowLeft,
+.arrowRight {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    transition: 0.2s;
+}
+
+.arrowLeft:hover,
+.arrowRight:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.arrowLeft {
+    right: 50rem;
+}
+
+.arrowRight {
+    left: 50rem;
+}
+
+.checkListContainer {
+    background-color: #6b0303;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    margin-top: 15rem;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.checkListCard {
+    background-color: #eee;
+    width: 20rem;
+    text-align: center;
+    padding: 2vw;
+    transition: 0.2s;
+}
+
+.checkListCard img {
+    width: 10vw;
+    margin-bottom: 1vw;
+}
+
+.checkListCard h3 {
+    font-size: 1.2vw;
+    margin-bottom: 0.5vw;
+}
+
+.checkListCard p {
+    font-size: 0.9vw;
+    margin-bottom: 1vw;
+    color: #000;
+}
+
+.checkListCard a {
+    color: red;
+    font-size: 0.9vw;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.servicesMargin {
+    margin: 1vw;
+}
+
+.priceListMargin {
+    margin-top: 4.1rem;
+}
+
+
+
+/* LATEST PROMO */
+.promoTitle h1 {
+    color: #000;
+    margin: 7rem 0rem 1rem 5rem;
+
+}
+
+.promoContainer {
+    display: flex;
+    max-width: 100%;
+    min-height: 500px;
+    background-color: #6b0303;
+    margin-bottom: 50px;
+}
+
+.promos img {
+    width: 400px;
+    height: auto;
+    margin-top: 2.9rem;
+    margin-left: 5rem;
+}
+
+/* Price List */
+
+.priceListTitle {
+    margin-top: 5rem;
+    text-align: center;
+    padding: 30px 20px 0px;
+}
+
+.priceListTitle h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.priceListTitle p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.priceContainer {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0px auto;
+}
+
+.priceContainer h2 {
+    margin-top: 40px;
+    font-size: 22px;
+    border-left: 5px solid #6b0303;
+    padding-left: 10px;
+}
+
+.priceTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.priceTable th:first-child,
+.priceTable td:first-child {
+    width: 70%;
+}
+
+.priceTable th:last-child,
+.priceTable td:last-child {
+    width: 30%;
+    text-align: right;
+}
+
+.priceTable th,
+.priceTable td {
+    padding: 15px;
+}
+
+.priceTable th {
+    background: #6b0303;
+    color: white;
+    text-align: left;
+}
+
+.priceTable tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.priceTable tr:hover {
+    background: #f0c5c5;
+    transition: 0.2s;
+}
+
+
+.priceTable td {
+    word-wrap: break-word;
+}
+
+
+/* LOCATION */
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.locationTitle {
+    width: 100%;
+    padding: 50px 60px 20px 0px;
+    text-align: left;
+}
+
+.locationTitle h1 {
+    color: #000;
+    margin: 0rem 0rem 1rem 5rem;
+}
+
+
+.locationContainer {
+    width: 100%;
+    background-color: #6b0303;
+    padding: 60px 60px;
+    box-sizing: border-box;
+}
+
+
+.locationCard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    align-items: stretch;
+}
+
+
+.locationCard>div {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.locationCard>div:hover {
+    transform: translateY(-5px);
+}
+
+
+.locationCard img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+
+.locationCard button {
+    margin-top: auto;
+    padding: 10px 15px;
+    border: none;
+    background: #6b0303;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.locationCard button:hover {
+    background: #900404;
+}
+
+/* FOOTER */
+
+footer {
+    background-color: #6b0303;
+    color: white;
+    padding: 40px;
+    margin-top: auto;
+    width: 96%;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerSocials>img {
+    width: 300px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.iconRow {
+    display: flex;
+}
+
+.iconRow img {
+    width: 50px;
+    margin-right: 60px;
+    cursor: pointer;
+}
+
+.contactInfo {
+    width: 30%;
+}
+
+.contactInfo h3 {
+    margin-bottom: 2px;
+    font-size: 25px;
+}
+
+.contactInfo p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.shareThoughts {
+    width: 25%;
+    ;
+}
+
+.shareThoughts h3 {
+    margin-bottom: 2px;
+    font-size: 25px;
+}
+
+.shareThoughts p {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.shareThoughts a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.shareThoughts a:hover {
+    text-decoration: underline;
+}
+
+/* e-bikes CSS */
+.ebike-container {
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    gap: 30px;
+    justify-content: center;
+    padding: 50px 0;
+    align-items: center;
+
+}
+
+.ebike-container {
+    flex: 1;
+}
+
+.ebike-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    width: 350px;
+    height: 400px;
+}
+
+.ebike-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.ebike-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    flex-direction: column;
+    gap: 2px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.ebike-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+.addToCart {
+    background-color: rgb(181, 1, 1);
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.ebike-price {
+    color: #681212;
+}
+
+.addToCart {
+    font-size: small;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    padding-top: 1rem;
+    font-size: 14px;
+}
+
+.filter-buttons button {
+    color: #fff;
+    margin-top: 3rem;
+    padding: 10px 5rem;
+    border: none;
+    background-color: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.2s;
+    background-color: #6b0303;
+}
+
+.filter-buttons button:hover {
+    background-color: #6b0303c9;
+    color: white;
+}       
+
+/* FILTER */
+.openFilterBtn {
+    margin-top: 3rem;
+    padding: 10px 2rem !important;
+    background-color: #fff !important;
+    color: #6b0303 !important;
+    border: 2px solid #6b0303 !important;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.openFilterBtn:hover {
+    background-color: #6b0303 !important;
+    color: #fff !important;
+}
+
+/* FILTER MODAL */
+.filterOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1001;
+}
+.filterOverlay.active { 
+    display: block; 
+}
+
+.filterModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 92%;
+    z-index: 1002;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+.filterModal.active { 
+    display: block; 
+}
+
+.filterTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #6b0303;
+    color: #fff;
+}
+.filterTitle h3 { 
+    margin: 0; 
+    font-size: 16px; 
+}
+.filterCloseBtn { 
+    font-size: 24px; 
+    cursor: pointer; 
+    color: #fff; 
+}
+.filterCloseBtn:hover { 
+    color: #ffcccc; 
+}
+
+.filterBody {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.filterSection { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.filterLabel {
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b0303;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.filterPills { 
+    display: flex; flex-wrap: wrap; gap: 8px; 
+}
+
+.filterPill {
+    padding: 7px 16px;
+    border: 2px solid #6b0303;
+    border-radius: 20px;
+    background: #fff;
+    color: #6b0303;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.filterPill:hover { 
+    background-color: #f9e5e5; 
+}
+.filterPill.active { 
+    background-color: #6b0303; color: #fff; 
+}
+
+.filterActions {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid #eee;
+    justify-content: flex-end;
+}
+.filterResetBtn {
+    padding: 9px 24px;
+    border: 2px solid #6b0303;
+    border-radius: 6px;
+    background: #fff;
+    color: #6b0303;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.filterResetBtn:hover { 
+    background-color: #f9e5e5; 
+}
+
+.filterOkBtn {
+    padding: 9px 32px;
+    border: none;
+    border-radius: 6px;
+    background: #6b0303;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.filterOkBtn:hover { 
+    background-color: #4d0202; 
+}
+
+
+/* SPECIFICATIONS BUTTON */
+.viewSpecs {
+    background-color: transparent;
+    border: 2px solid #6b0303;
+    color: #6b0303;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: small;
+    font-weight: bold;
+    width: auto;
+    transition: background-color 0.2s, color 0.2s;
+    margin-bottom: 4px;
+}
+
+.viewSpecs:hover {
+    background-color: #6b0303;
+    color: #fff;
+}
+
+/* SPECS MODAL OVERLAY */
+.specsOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+}
+
+.specsOverlay.active {
+    display: block;
+}
+
+/* SPECS MODAL BOX */
+.specsModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 10px;
+    width: 350px;
+    max-width: 90%;
+    z-index: 1002;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.specsModal.active {
+    display: block;
+}
+
+/* SPECS MODAL HEADER */
+.specsTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #6b0303;
+    color: #fff;
+}
+
+.specsTitle h3 {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#specsCloseBtn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    line-height: 1;
+}
+
+#specsCloseBtn:hover {
+    color: #ffcccc;
+}
+
+/* SPECS MODAL BODY */
+.specsContent {
+    padding: 16px 20px;
+}
+
+.specsContent p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.specsContent p:last-child {
+    border-bottom: none;
+}
+
+.specsContent p::before {
+    content: "✔";
+    color: #6b0303;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+
+
+
+/* About Us CSS */
+
+.aboutBackground {
+    height: 100vh;
+    background:
+        linear-gradient(rgba(255, 195, 195, 0.432)),
+        url("assets/E-BikeNewReleasesCopy.jpg") center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+.aboutContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.aboutCard {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: #681212d5;
+    padding: 30px 40px;
+    border-radius: 20px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.aboutLeft img {
+    width: 400px;
+    height: auto;
+}
+
+.aboutRight {
+    font-family: 'Poppins', sans-serif;
+}
+
+.aboutRight h2 {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.aboutRight p {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.owners {
+    margin-top: 15px;
+    text-align: left;
+}
+
+
+/* Services CSS */
+
+.servicesBackground {
+    height: 40vw;
+    background:
+        linear-gradient(#ffc3c36e),
+        url("assets/E-BikeNewReleasesCopy.jpg") center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+.servicesCard {
+    margin-top: 7rem;
+    display: flex;
+    align-items: center;
+    background-color: #681212b7;
+    max-width: 100%;
+    min-height: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: justify;
+}
+
+.serInfo {
+    text-align: justify;
+    text-align: center;
+}
+
+.ser {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.serInfo p {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+    padding: 0rem 6rem;
+}
+
+.serBtn {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: #6b0303;
+    transition: 0.2;
+}
+
+.serBtn a {
+    text-decoration: none;
+    color: #6b0303;
+}
+
+.ser-Btn {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.serBtn:hover {
+    background-color: #d1d1d1;
+}
+
+/* Repair CSS */
+
+
+.repairContainer {
+    padding-top: 7rem;
+    max-width: 100%;
+    min-height: 500px;
+    background-color: #681212b7;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.repairCard {
+    width: 400px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.repairContent {
+    display: grid;
+    grid-template-columns: repeat(3, 350px);
+    gap: 8rem;
+    justify-content: center;
+    padding: 50px 0;
+    align-items: center;
+}
+
+.repairCard p {
+    padding-top: 5px;
+    text-align: center;
+}
+
+.repair {
+    padding-top: 2rem;
+    align-items: center;
+    padding-left: 5rem;
+}
+
+.rep-Btn {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.repBtn {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.2;
+}
+
+.repBtn a {
+    text-decoration: none;
+}
+
+.repBtnn {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.2;
+    cursor: pointer;
+}
+
+.repBtnn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.repBtnn:hover {
+    background-color: #760909;
+}
+
+.repBtn:hover {
+    background-color: #dcd8d8;
+}
+
+.repImg {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.p2 {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.6;
+    padding: 0rem 1rem;
+}
+
+.repImgg {
+    width: 120px;
+    height: 140px;
+    display: block;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+/* Maintenance CSS */
+
+.repMain-Btn {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.repMainBtn {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #6b0303;
+    transition: 0.2;
+}
+
+.repMainBtn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.repMainBtnn {
+    background-color: #ffffff;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
+    transition: 0.2;
+    cursor: pointer;
+}
+
+.repMainBtnn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.repMainBtnn:hover {
+    background-color: hsla(0, 0%, 100%, 0.856);
+}
+
+.repMainBtn:hover {
+    background-color: #760909;
+}
+
+.schedBtn {
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #6b0303;
+    color: #fff;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.schedBtn:hover {
+    background-color: #760909;
+}
+
+.schedContainer {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+/* sched css */
+
+/* Overlay background */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1000rem;
+    height: 1000rem;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 999;
+}
+
+/* Modal box */
+.scheduleModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #fff;
+    width: 400px;
+    max-width: 90%;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+    z-index: 1000;
+    transition: 0.3s ease;
+}
+
+/* Active state */
+.scheduleModal.active,
+.modalOverlay.active {
+    display: block;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Close button */
+.closeModal {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Form styling */
+.scheduleForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formRow {
+    display: flex;
+    gap: 10px;
+}
+
+.formRow input {
+    width: 50%;
+}
+
+/* Inputs */
+.scheduleForm input,
+.scheduleForm select,
+.scheduleForm textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Date picker with icon */
+.datePicker {
+    position: relative;
+}
+
+.datePicker input {
+    width: 90%;
+    padding: 9px 18px;
+}
+
+.submitBtn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    background: #218838;
+}
+
+
+                                                                        /* NEW */
+/* PROFILE PICTURE */
+.profilePicSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.profilePicPreview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ccc;
+}
+
+.changePicBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.changePicBtn:hover {
+    background-color: #45a049;
+}
+
+                                                        /* RESPONSIVENESS */ 
+/* HAMBURGER BUTTON */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 5px 10px;
+    order: 1;
+}
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+    }
+    header > a {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        order: 1;
+    }
+
+    .Icons {
+        order: 2;
+        gap: 12px;
+        margin-left: auto;
+    }
+
+    .Icons > .profileIcon img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .searchBar input {
+        width: 80px;
+        font-size: 12px;
+    }
+
+    .searchBar img {
+        width: 20px;
+        height: 20px;
+    }
+    .navbar {
+        order: 3;
+        width: 100%;
+    }
+
+    .navLinks {
+        display: none;
+        width: 100%;
+        background-color: #6b0303;
+        border-radius: 0 0 10px 10px;
+        padding-bottom: 15px;
+    }
+
+    .navLinks.open {
+        display: block;
+    }
+    .navLinks::before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 60px;
+        background: url('assets/bright logo2 no bg.png') center/contain no-repeat;
+        margin: 15px 0 10px 15px;
+    }
+
+    .navLinks ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+    .navLinks ul li {
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .navLinks a {
+        font-size: 15px;
+        display: block;
+        padding: 12px 20px;
+        width: 100%;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    .navLinks a:hover,
+    .navLinks a.active {
+        background-color: rgba(255,255,255,0.15);
+        border-radius: 0;
+        color: #fff;
+    }
+
+    .cartWindow,
+    .profileWindow {
+        width: 92%;
+        right: 4%;
+        left: 4%;
+        top: 65px;
+    }
+
+    .featuredE-Bikes {
+        margin-top: 3rem;
+        padding: 0 10px;
+    }
+
+    .featuredCategory {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .featuredCategory div {
+        font-size: 13px;
+        padding: 6px 14px;
+    }
+
+    .featuredE-Bikes img {
+        width: 28vw;
+    }
+
+    .arrowLeft {
+        left: 5px;
+        font-size: 1.2rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .arrowRight {
+        right: 5px;
+        font-size: 1.2rem;
+        width: 2rem;
+        height: 2rem;
+    }
+    .checkListContainer {
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+        gap: 1rem;
+        padding: 2rem 1rem;
+        margin-top: 3rem;
+    }
+
+    .checkListCard {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .checkListCard img {
+        width: 25vw;
+    }
+
+    .checkListCard h3 {
+        font-size: 14px;
+    }
+
+    .checkListCard p,
+    .checkListCard a {
+        font-size: 12px;
+    }
+
+     .TwoWheelsActiveDisplay,
+    .ThreeWheelsDisplay,
+    .FourWheelsDisplay {
+        overflow: hidden;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .TwoWheelsActiveDisplay img,
+    .ThreeWheelsDisplay img,
+    .FourWheelsDisplay img {
+        min-width: 100%;
+        width: 100%;
+        display: none;
+    }
+
+    .TwoWheelsActiveDisplay img:first-child,
+    .ThreeWheelsDisplay img:first-child,
+    .FourWheelsDisplay img:first-child {
+        display: block;
+    }
+    .arrowContainer {
+        position: static;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 1rem;
+        height: auto;
+    }
+
+    .arrowLeft,
+    .arrowRight {
+        position: static;
+        transform: none;
+        margin: 0;
+    }
+
+    footer {
+        padding: 20px 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .footerContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footerSocials > img {
+        width: 160px;
+    }
+
+    .contactInfo,
+    .shareThoughts {
+        width: 100%;
+    }
+
+    .contactInfo h3,
+    .shareThoughts h3 {
+        font-size: 18px;
+    }
+
+    .contactInfo p,
+    .shareThoughts p {
+        font-size: 13px;
+    }
+
+    .iconRow img {
+        width: 30px;
+        margin-right: 15px;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+
+    .searchBar input {
+        width: 60px;
+        font-size: 11px;
+    }
+
+    .checkListContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .checkListCard img {
+        width: 20vw;
+    }
+
+    .featuredE-Bikes img {
+        width: 32vw;
+    }
+
+    .featuredCategory div {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}
+
+/*E-BIKES.PHP RESPONSIVE*/
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+    .filter-buttons {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .filter-buttons button {
+        margin-top: 0;
+        padding: 8px 16px;
+        font-size: 13px;
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .openFilterBtn {
+        margin-top: 0 !important;
+        flex: 1;
+        min-width: 100px;
+    }
+    .ebike-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px 10px;
+    }
+
+    .ebike-card {
+        width: 100%;
+        height: auto;
+        min-height: 320px;
+        box-sizing: border-box;
+    }
+
+    .ebike-image {
+        width: 100%;
+        height: 160px;
+        object-fit: contain;
+    }
+
+    .ebike-info {
+        width: 95%;
+        padding: 8px 0;
+        gap: 5px;
+    }
+
+    .ebike-name {
+        font-size: 13px;
+        margin: 0;
+        text-align: center;
+    }
+
+    .ebike-price {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .viewSpecs,
+    .addToCart {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .specsModal {
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .filterModal {
+        width: 92%;
+    }
+
+    .filterPills {
+        gap: 6px;
+    }
+
+    .filterPill {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ebike-container {
+        grid-template-columns: 1fr;
+        padding: 15px 10px;
+        gap: 12px;
+    }
+
+    .ebike-card {
+        min-height: unset;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+        height: auto;
+    }
+
+    .ebike-image {
+        width: 110px;
+        height: 110px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .ebike-info {
+        width: 100%;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .ebike-name {
+        font-size: 13px;
+        text-align: left;
+        margin: 0;
+    }
+
+    .ebike-price {
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .viewSpecs,
+    .addToCart {
+        width: 100%;
+        font-size: 11px;
+        padding: 6px;
+    }
+    .filter-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 0 10px;
+    }
+
+    .filter-buttons button,
+    .openFilterBtn {
+        width: 100%;
+        padding: 8px;
+        font-size: 12px;
+        margin-top: 0 !important;
+    }
+}
+
+/*SERVICES.PHP RESPONSIVE*/
+
+@media (max-width: 768px) {
+    .servicesBackground {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 2rem;
+    }
+    .aboutContainer {
+        height: auto;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+    .servicesCard {
+        margin-top: 2rem;
+        width: 100%;
+        min-height: auto;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+    }
+    .serInfo {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    .ser {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    .ser-Btn {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding-left: 0;
+        padding-bottom: 15px;
+    }
+
+    .serBtn {
+        width: 80%;
+        height: 44px;
+        font-size: 16px;
+    }
+    .serInfo p {
+        font-size: 14px;
+        padding: 0 1rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .ser {
+        font-size: 26px;
+    }
+
+    .serBtn {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .serInfo p {
+        font-size: 13px;
+        padding: 0 0.5rem;
+    }
+}
+
+/*REPAIR.PHP RESPONSIVE*/
+
+@media (max-width: 768px) {
+    .repairContainer {
+        grid-template-columns: 1fr;
+        margin-top: 5rem;
+        min-height: auto;
+        padding-bottom: 2rem;
+    }
+    .repair {
+        padding: 1.5rem 1rem;
+    }
+    .rep-Btn {
+        gap: 10px;
+        padding-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .repBtn,
+    .repBtnn {
+        width: 45%;
+        height: 40px;
+        font-size: 15px;
+    }
+    .repairContent {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 20px 10px;
+    }
+
+    .repairCard {
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .repairCard p {
+        font-size: 13px;
+        padding-top: 8px;
+    }
+
+    .repImg,
+    .repImgg {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+
+    .p2 {
+        font-size: 12px;
+        padding: 0 0.5rem;
+    }
+    .schedContainer {
+        padding: 1rem 0 0.5rem;
+    }
+
+    .schedBtn {
+        width: 80%;
+        font-size: 16px;
+    }
+    .scheduleModal {
+        width: 92%;
+        padding: 20px 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .formRow {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .formRow input {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .scheduleForm input,
+    .scheduleForm select,
+    .scheduleForm textarea {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .repairContent {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+
+    .repairCard {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        min-height: unset;
+        height: auto;
+        padding: 12px;
+    }
+
+    .repairCard p:first-child {
+        font-size: 13px;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+
+    .repImg,
+    .repImgg {
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
+        object-fit: contain;
+        margin: 0;
+    }
+    .repairCard {
+        flex-wrap: wrap;
+    }
+
+    .p2 {
+        font-size: 12px;
+        padding: 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    .repBtn,
+    .repBtnn {
+        width: 48%;
+        font-size: 13px;
+    }
+
+    .schedBtn {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    /* MODAL FORM */
+    .formRow {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .formRow input {
+        width: 100%;
+    }
+}
+
+/*MAINTENANCE.PHP RESPONSIVE*/
+
+@media (max-width: 768px) {
+
+    .repMain-Btn {
+        gap: 10px;
+        padding-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .repMainBtn,
+    .repMainBtnn {
+        width: 45%;
+        height: 40px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .repMainBtn,
+    .repMainBtnn {
+        width: 48%;
+        font-size: 13px;
+    }
+}
+
+/*ABOUT US.PHP RESPONSIVE*/
+
+@media (max-width: 768px) {
+
+    .aboutBackground {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 2rem;
+    }
+    .aboutContainer {
+        height: auto;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+    .aboutCard {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 2rem;
+        padding: 20px 15px;
+        gap: 15px;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: auto;
+    }
+    .aboutLeft img {
+        width: 140px;
+    }
+    .aboutRight h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .aboutRight p {
+        font-size: 13px;
+        line-height: 1.6;
+        text-align: justify;
+    }
+    .locationTitle {
+        padding: 30px 0 10px 20px;
+    }
+
+    .locationTitle h1 {
+        margin-left: 10px;
+        font-size: 24px;
+    }
+    .locationContainer {
+        padding: 20px 15px;
+    }
+    .locationCard {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .locationCard > div {
+        padding: 15px;
+    }
+
+    .locationCard h2 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .locationCard img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .locationCard button {
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .aboutCard {
+        padding: 15px 10px;
+        margin-top: 1.5rem;
+    }
+
+    .aboutLeft img {
+        width: 100px;
+    }
+
+    .aboutRight h2 {
+        font-size: 18px;
+    }
+
+    .aboutRight p {
+        font-size: 12px;
+    }
+
+    .locationTitle h1 {
+        font-size: 20px;
+    }
+
+    .locationCard img {
+        height: 160px;
+    }
+
+    .locationCard h2 {
+        font-size: 14px;
+    }
+}
+
+/*LOGIN.PHP & SIGNUP.PHP RESPONSIVE*/
+ 
+@media (max-width: 768px) {
+ 
+    section {
+        padding: 20px 15px;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
+ 
+    .Login {
+        width: 100%;
+        max-width: 420px;
+        padding: 40px 30px;
+        box-sizing: border-box;
+    }
+ 
+    .Login h1 {
+        font-size: 1.6rem;
+        margin-bottom: 1.2rem;
+    }
+ 
+    .email input,
+    .userName input,
+    .Password input {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 10px;
+    }
+ 
+    .email,
+    .userName,
+    .Password {
+        width: 100%;
+    }
+ 
+    .LoginBTN {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
+ 
+    .checkboxPassword {
+        font-size: 13px;
+    }
+ 
+    .Register {
+        font-size: 13px;
+        text-align: center;
+    }
+}
+ 
+@media (max-width: 480px) {
+ 
+    .Login {
+        padding: 30px 20px;
+        border-radius: 8px;
+    }
+ 
+    .Login h1 {
+        font-size: 1.4rem;
+    }
+ 
+    .email input,
+    .userName input,
+    .Password input {
+        font-size: 13px;
+        padding: 9px;
+    }
+ 
+    .LoginBTN {
+        font-size: 14px;
+        padding: 11px;
+    }
+ 
+    .checkboxPassword {
+        font-size: 12px;
+    }
+ 
+    .Register {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+ 
+    .checkoutModal {
+        width: 96%;
+        max-height: 92vh;
+        border-radius: 10px;
+    }
+ 
+    /* Stack columns vertically */
+    .checkoutModalBody {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+ 
+    .checkoutModalLeft {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 16px;
+        gap: 12px;
+    }
+ 
+    .checkoutModalRight {
+        padding: 16px;
+        gap: 12px;
+    }
+ 
+    .checkoutModalHeader {
+        padding: 13px 16px;
+    }
+ 
+    .checkoutModalHeader h2 {
+        font-size: 1.1rem;
+    }
+ 
+    .checkoutSection {
+        padding: 12px 14px;
+    }
+ 
+    .checkoutSection h3 {
+        font-size: 0.9rem;
+    }
+ 
+    .checkoutSection.userInfo p {
+        font-size: 0.82rem;
+    }
+ 
+    .checkoutSection.paymentMethod .paymentSelect {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+ 
+    .gcashPanel {
+        padding: 12px 14px;
+        gap: 8px;
+    }
+ 
+    .gcashNumberInput {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+ 
+    .openGcashBtn {
+        font-size: 0.88rem;
+        padding: 10px 14px;
+    }
+ 
+    .checkoutHeader,
+    .checkoutItem {
+        font-size: 0.78rem;
+        padding: 7px 4px;
+    }
+ 
+    .checkoutSection.summary p {
+        font-size: 0.83rem;
+    }
+ 
+    .checkoutSection.summary p strong {
+        font-size: 0.9rem;
+    }
+ 
+    #placeOrderBtn {
+        font-size: 0.95rem;
+        padding: 12px 16px;
+    }
+}
+ 
+@media (max-width: 480px) {
+ 
+    /* Slide up from bottom as a sheet */
+    .checkoutModal {
+        width: 100%;
+        max-height: 95vh;
+        border-radius: 12px 12px 0 0;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+    }
+ 
+    .checkoutModal.active {
+        transform: none;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+ 
+    .checkoutModalHeader {
+        padding: 12px 14px;
+    }
+ 
+    .checkoutModalHeader h2 {
+        font-size: 1rem;
+    }
+ 
+    .checkoutModalLeft,
+    .checkoutModalRight {
+        padding: 14px;
+        gap: 10px;
+    }
+ 
+    .checkoutSection {
+        padding: 10px 12px;
+    }
+ 
+    .checkoutSection h3 {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+ 
+    .checkoutSection.userInfo p {
+        font-size: 0.8rem;
+    }
+ 
+    .checkoutSection.paymentMethod .paymentSelect {
+        font-size: 0.82rem;
+        padding: 8px 10px;
+    }
+ 
+    .gcashRefBox {
+        font-size: 0.78rem;
+    }
+ 
+    .gcashNumberInput {
+        font-size: 0.82rem;
+    }
+ 
+    .openGcashBtn {
+        font-size: 0.85rem;
+        padding: 9px 12px;
+    }
+ 
+    .gcashNote {
+        font-size: 0.72rem;
+    }
+ 
+    .checkoutHeader,
+    .checkoutItem {
+        font-size: 0.75rem;
+        padding: 6px 4px;
+    }
+ 
+    .checkoutSection.summary p {
+        font-size: 0.8rem;
+    }
+ 
+    #placeOrderBtn {
+        font-size: 0.9rem;
+        padding: 11px 14px;
+    }
+}
