@@ -1,13 +1,13 @@
 <?php
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "bright_ebike_db";
+$host     = getenv('DB_HOST')     ?: 'switchyard.proxy.rlwy.net';
+$username = getenv('DB_USER')     ?: 'root';
+$password = getenv('DB_PASS')     ?: 'eVcyCCDNCocDdWcyFAKYqupisbkSVvXW';
+$dbname   = getenv('DB_NAME')     ?: 'railway';
+$port     = getenv('DB_PORT')     ?: '37306';
 
-    $conn = mysqli_connect($host, $username, $password, $dbname);
+$conn = mysqli_connect($host, $username, $password, $dbname, $port);
 
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
-
 ?>
