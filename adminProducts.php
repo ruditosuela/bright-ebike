@@ -86,7 +86,31 @@ FROM product p
 LEFT JOIN stocks s ON p.product_id = s.product_id
 ";
 $result = mysqli_query($conn, $query);
+
+// DELETE REVIEW
+if (isset($_POST['deleteReview'])) {
+    $review_id = (int)$_POST['review_id'];
+    $rRow = mysqli_fetch_assoc(mysqli_query($conn, "SELECT r.*, c.username, p.product_name FROM reviews r JOIN customers c ON r.user_id=c.user_id JOIN product p ON r.product_id=p.product_id WHERE r.review_id=$review_id"));
+    if ($rRow) {
+        mysqli_query($conn, "DELETE FROM reviews WHERE review_id=$review_id");
+        $desc = "Deleted review #$review_id by {$rRow['username']} on {$rRow['product_name']}";
+        mysqli_query($conn, "INSERT INTO activity_log (admin_user, action, description) VALUES ('$admin', 'Deleted Review', '$desc')");
+    }
+}
+
+// FETCH REVIEWS
+$reviewsQuery = "
+    SELECT r.review_id, r.rating, r.review_text, r.created_at,
+           c.username, c.full_name,
+           p.product_name
+    FROM reviews r
+    JOIN customers c ON r.user_id = c.user_id
+    JOIN product p ON r.product_id = p.product_id
+    ORDER BY r.created_at DESC
+";
+$reviewsResult = mysqli_query($conn, $reviewsQuery);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -167,6 +191,69 @@ $result = mysqli_query($conn, $query);
                 <?php } ?>
             </table>
         </div>
+        <!-- REVIEWS SECTION -->
+        <div class="header-row reviews-header-row">
+            <h1>Customer Reviews</h1>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                    <th>Date</th>
+                    <th>View</th>
+                    <th>Delete</th>
+                </tr>
+                <?php
+                $hasReviews = false;
+                while ($rev = mysqli_fetch_assoc($reviewsResult)):
+                    $hasReviews = true;
+                    $stars = (int)$rev['rating'];
+                    $starDisplay = str_repeat('★', $stars) . str_repeat('☆', 5 - $stars);
+                    $displayName = htmlspecialchars($rev['full_name'] ?: $rev['username']);
+                    $reviewDate = date('M d, Y', strtotime($rev['created_at']));
+                    $shortText = mb_strlen($rev['review_text']) > 60 ? mb_strimwidth($rev['review_text'], 0, 60, '...') : $rev['review_text'];
+                ?>
+                    <tr>
+                        <td><?= $rev['review_id'] ?></td>
+                        <td><?= $displayName ?></td>
+                        <td><?= htmlspecialchars($rev['product_name']) ?></td>
+                        <td class="review-rating-cell">
+                            <?= $starDisplay ?> <span class="review-rating-num">(<?= $stars ?>)</span>
+                        </td>
+                        <td class="review-text-cell">
+                            <?= htmlspecialchars($shortText) ?>
+                        </td>
+                        <td class="review-date-cell"><?= $reviewDate ?></td>
+                        <td>
+                            <button class="edit-btn review-view-btn" onclick="openReviewModal(
+                            '<?= $rev['review_id'] ?>',
+                            '<?= htmlspecialchars(addslashes($displayName)) ?>',
+                            '<?= htmlspecialchars(addslashes($rev['product_name'])) ?>',
+                            '<?= $stars ?>',
+                            '<?= htmlspecialchars(addslashes($rev['review_text'])) ?>',
+                            '<?= $reviewDate ?>'
+                        )">View</button>
+                        </td>
+                        <td>
+                            <form method="POST" onsubmit="return confirm('Delete this review? This cannot be undone.');">
+                                <input type="hidden" name="review_id" value="<?= $rev['review_id'] ?>">
+                                <button type="submit" name="deleteReview" class="review-delete-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+                <?php if (!$hasReviews): ?>
+                    <tr>
+                        <td colspan="8" class="review-empty-cell">No customer reviews yet.</td>
+                    </tr>
+                <?php endif; ?>
+            </table>
+        </div>
+    </div>
     </div>
 
     <div id="productModal" class="modal">
@@ -235,6 +322,21 @@ $result = mysqli_query($conn, $query);
             </form>
         </div>
     </div>
+
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h2>Review Details</h2>
+            <p><strong>Review ID:</strong> <span id="modalReviewId"></span></p>
+            <p><strong>Customer:</strong> <span id="modalReviewCustomer"></span></p>
+            <p><strong>Product:</strong> <span id="modalReviewProduct"></span></p>
+            <p><strong>Rating:</strong> <span id="modalReviewStars"></span></p>
+            <p><strong>Date:</strong> <span id="modalReviewDate"></span></p>
+            <p><strong>Review:</strong></p>
+            <p id="modalReviewText"></p>
+        </div>
+    </div>
+
     <div id="logoutModal" class="modal">
         <div class="modal-content">
 

@@ -33,7 +33,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <header>
-        <a href="#"><img src="assets/bright logo2 no bg.png" alt="Bright E-Bike Logo"></a>
+        <a href="#"><img src="assets/bright logo2.jpg" alt="Bright E-Bike Logo"></a>
         <button class="hamburger" id="hamburger">&#9776;</button>
         <nav class="navbar">
             <div id="navLinks" class="navLinks">
@@ -42,6 +42,7 @@ if (isset($_SESSION['username'])) {
                     <li><a href="e-bikes.php">E-BIKES</a></li>
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="aboutUs.php">ABOUT US</a></li>
+                    <li><a href="reviews.php">REVIEWS</a></li>
                 </ul>
         </nav>
         <div class="Icons">

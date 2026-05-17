@@ -48,7 +48,6 @@ function editProduct(id, name, category, price, stock) {
     openEditModal();
 }
 
-// ================= CLOSE WHEN CLICKING OUTSIDE =================
 window.onclick = function (event) {
     const addModal = document.getElementById("productModal");
     const editModal = document.getElementById("editProductModal");
@@ -62,6 +61,33 @@ window.onclick = function (event) {
     }
 };
 
+// NEW
+
+function openReviewModal(id, customer, product, rating, text, date) {
+    document.getElementById("modalReviewId").innerText = id;
+    document.getElementById("modalReviewCustomer").innerText = customer;
+    document.getElementById("modalReviewProduct").innerText = product;
+    document.getElementById("modalReviewDate").innerText = date;
+    document.getElementById("modalReviewText").innerText = text;
+ 
+    const stars = parseInt(rating);
+   document.getElementById("modalReviewStars").innerHTML =
+    '★'.repeat(stars) + '☆'.repeat(5 - stars) + 
+    '<span style="color: black;">  (' + stars + '/5)</span>';
+ 
+    document.getElementById("reviewModal").style.display = "flex";
+}
+ 
+function closeReviewModal() {
+    document.getElementById("reviewModal").style.display = "none";
+}
+ 
+window.addEventListener("click", function (event) {
+    const modal = document.getElementById("reviewModal");
+    if (modal && event.target === modal) {
+        modal.style.display = "none";
+    }
+});
 
 //ORDER MANAGEMENT FUNCTION
 //View orders

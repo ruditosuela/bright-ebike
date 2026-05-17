@@ -446,6 +446,82 @@ table button:hover {
     background-color: #1e8449;
 }
 
+                                                                            /* NEW */
+.reviews-header-row {
+    margin-top: 40px;
+}
+ 
+.review-rating-cell {
+    color: #c8a000;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+ 
+.review-rating-num {
+    color: #555;
+    font-size: 0.8rem;
+}
+ 
+.review-text-cell {
+    max-width: 220px;
+}
+ 
+.review-view-btn {
+    margin-left: 4px;
+}
+ 
+.review-date-cell {
+    white-space: nowrap;
+}
+ 
+.review-delete-btn {
+    background: #6b0303;
+    color: #fff;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+ 
+.review-delete-btn:hover {
+    background: #4d0202;
+}
+ 
+.review-empty-cell {
+    text-align: center;
+    color: #999;
+    padding: 24px;
+}
+ 
+/* Review Details Modal */
+.modal-review-stars {
+    color: #c8a000;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+ 
+.modal-review-label {
+    margin-top: 12px;
+    display: block;
+}
+ 
+.modal-review-text {
+    background: #f9f9f9;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 6px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+#modalReviewStars {
+    color: #f5a623;
+}
+
+
                                                                     /* ORDER MANAGEMENT */
 
 .view-btn {
@@ -744,9 +820,8 @@ table td {
         font-size: 13px;
     }
  
-    /* ── TABLES ── */
     table {
-        min-width: 500px;               /* prevents column squishing */
+        min-width: 500px;    
         font-size: 13px;
     }
  
@@ -754,8 +829,7 @@ table td {
     table td {
         padding: 8px 10px;
     }
- 
-    /* ── REPORT GRID: 2 columns ── */
+
     .report-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -764,8 +838,7 @@ table td {
     .stat-card p {
         font-size: 22px;
     }
- 
-    /* ── MODALS: full width ── */
+
     .modal {
         padding: 15px;
     }
@@ -854,4 +927,3 @@ table td {
         font-size: 12px;
     }
 }
-

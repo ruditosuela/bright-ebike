@@ -57,7 +57,7 @@ if (isset($_SESSION['username'])) {
 <body>
     <main>
         <header>
-            <a href="#"><img src="assets/bright logo2 no bg.png" alt="Bright E-Bike Logo"></a>
+            <a href="#"><img src="assets/bright logo2.jpg" alt="Bright E-Bike Logo"></a>
             <button class="hamburger" id="hamburger">&#9776;</button>
             <nav class="navbar">
                 <div id="navLinks" class="navLinks">
@@ -66,6 +66,7 @@ if (isset($_SESSION['username'])) {
                         <li><a href="e-bikes.php">E-BIKES</a></li>
                         <li><a href="services.php">SERVICES</a></li>
                         <li><a href="aboutUs.php">ABOUT US</a></li>
+                        <li><a href="reviews.php">REVIEWS</a></li>
                     </ul>
             </nav>
             <div class="Icons">
@@ -277,8 +278,9 @@ if (isset($_SESSION['username'])) {
                 </form>
             </div>
 
-
-            <script src="script.js"></script>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
 <footer>
     <div class="footerContainer">
@@ -286,10 +288,17 @@ if (isset($_SESSION['username'])) {
             <img src="assets/bright logo2 text.png">
 
             <div class="iconRow">
-                <img src="assets/facebookIcon-removebg-preview.png" alt="FaceBook">
-                <img src="assets/messengerIcon-removebg-preview.png" alt="Messenger">
-                <img src="assets/mailIcon-removebg-preview.png" alt="Email">
+                <a href="https://web.facebook.com/profile.php?id=100081527322607" target="_blank">
+                    <img src="assets/facebookIcon-removebg-preview.png" alt="FaceBook">
+                </a>
+                <a href="https://www.messenger.com/t/103672045608123" target="_blank">
+                    <img src="assets/messengerIcon-removebg-preview.png" alt="Messenger">
+                </a>
+                <a href="mailto:brightelectricbike.malanday@gmail.com" target="_blank">
+                    <img src="assets/mailIcon-removebg-preview.png" alt="Email">
+                </a>
             </div>
+
         </div>
         <div class="contactInfo">
             <h3>CONTACT INFO</h3>

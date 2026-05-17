@@ -16,7 +16,6 @@ $user = mysqli_fetch_assoc($userQuery);
 
 $user_id = $user['user_id'];
 
-// GET JSON DATA
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!$data || empty($data['cart'])) {
@@ -27,14 +26,10 @@ $cart = $data['cart'];
 $total = $data['total'];
 $payment = $data['payment'];
 
-/* =========================
-   START TRANSACTION
-========================= */
 mysqli_begin_transaction($conn);
 
 try {
 
-    // INSERT ORDER
     $orderSql = "
         INSERT INTO orders (user_id, total_amount, payment_method, status)
         VALUES ('$user_id', '$total', '$payment', 'Pending')
@@ -58,8 +53,7 @@ foreach ($cart as $item) {
         VALUES
         ('$order_id', '$product_id', '$quantity', '$price')"
     );
-
-    // UPDATE STOCKS
+    
     mysqli_query($conn,
         "UPDATE stocks
         SET quantity = quantity - $quantity

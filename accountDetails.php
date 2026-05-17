@@ -109,20 +109,20 @@ $profilePic = (!empty($user['profile_picture']) && file_exists($picPath))
                 <p class="editableField">
                     <strong>Full Name:</strong>
                     <input type="text" name="full_name" 
-                        value="<?php echo htmlspecialchars($user['full_name']); ?>"
+                        value="<?php echo htmlspecialchars($user['full_name'] ?? ''); ?>"
                         oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                 </p>
                 <p class="editableField">
                     <strong>Contact No:</strong>
                     <input type="text" name="contact_no" 
-                        value="<?php echo htmlspecialchars($user['contact_no']); ?>"
+                        value="<?php echo htmlspecialchars($user['contact_no'] ?? ''); ?>"
                         maxlength="11" pattern="[0-9]{11}" inputmode="numeric"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);" required>
                 </p>
                 <p class="editableField">
                     <strong>Address:</strong>
                     <input type="text" name="address" 
-                        value="<?php echo $user['address']; ?>" required>
+                        value="<?php echo htmlspecialchars($user['address'] ?? ''); ?>" required>
                 </p>
             </div>
             <button type="submit" name="updateProfile" class="saveBtn">Save Changes</button>

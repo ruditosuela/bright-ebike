@@ -757,3 +757,88 @@ if (hamburger && navLinks) {
         navLinks.classList.toggle("open");
     });
 }
+
+
+//CUSTOMER REVIEW
+const reviewFilterBtns = document.querySelectorAll('.reviewFilterBtn');
+if (reviewFilterBtns.length > 0) {
+    reviewFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            reviewFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+ 
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.reviewCard').forEach(card => {
+                card.style.display = (filter === 'all' || card.dataset.rating === filter) ? 'block' : 'none';
+            });
+ 
+            const visible = [...document.querySelectorAll('.reviewCard')].filter(c => c.style.display !== 'none');
+            const noRev = document.querySelector('.noReviews');
+            if (noRev) noRev.style.display = visible.length === 0 ? 'block' : 'none';
+        });
+    });
+}
+const submitReviewBtn = document.getElementById('submitReviewBtn');
+const reviewMsgEl     = document.getElementById('reviewMsg');
+ 
+if (submitReviewBtn) {
+    submitReviewBtn.addEventListener('click', () => {
+        const productId   = document.getElementById('reviewProduct').value;
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const reviewText  = document.getElementById('reviewText').value.trim();
+ 
+        reviewMsgEl.style.display = 'none';
+ 
+        if (!productId) {
+            showReviewMsg('Please select an e-bike.', 'error');
+            return;
+        }
+        if (!ratingInput) {
+            showReviewMsg('Please select a star rating.', 'error');
+            return;
+        }
+        if (reviewText.length < 10) {
+            showReviewMsg('Please write at least 10 characters.', 'error');
+            return;
+        }
+ 
+        submitReviewBtn.disabled = true;
+        submitReviewBtn.textContent = 'Submitting…';
+ 
+        fetch('submitReview.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                product_id:  productId,
+                rating:      ratingInput.value,
+                review_text: reviewText
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                showReviewMsg(data.message, 'success');
+                document.getElementById('reviewProduct').value = '';
+                document.querySelector('input[name="rating"]:checked').checked = false;
+                document.getElementById('reviewText').value = '';
+                setTimeout(() => location.reload(), 1500);
+            } else {
+                showReviewMsg(data.message, 'error');
+                submitReviewBtn.disabled = false;
+                submitReviewBtn.textContent = 'Submit Review';
+            }
+        })
+        .catch(() => {
+            showReviewMsg('Something went wrong. Please try again.', 'error');
+            submitReviewBtn.disabled = false;
+            submitReviewBtn.textContent = 'Submit Review';
+        });
+    });
+}
+ 
+function showReviewMsg(text, type) {
+    if (!reviewMsgEl) return;
+    reviewMsgEl.textContent = text;
+    reviewMsgEl.className = 'reviewMsg ' + type;
+    reviewMsgEl.style.display = 'block';
+}
