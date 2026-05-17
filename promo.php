@@ -34,6 +34,7 @@ if (isset($_SESSION['username'])) {
 <body>
     <header>
         <a href="#"><img src="assets/bright logo2 no bg.png" alt="Bright E-Bike Logo"></a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
         <nav class="navbar">
             <div id="navLinks" class="navLinks">
                 <ul>
@@ -197,6 +198,8 @@ if (isset($_SESSION['username'])) {
             <img src="assets/ComingSoonPromo.png" alt="Promo">
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 <footer>
     <div class="footerContainer">

@@ -32,6 +32,14 @@ if (isset($_POST['signupBTN'])) {
     } else {
         echo "<script>alert('Error: " . mysqli_error($conn) . "');</script>";
     }
+
+    $checkoutUser = null;
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        $sql = "SELECT * FROM customers WHERE username='$username'";
+        $result = mysqli_query($conn, $sql);
+        $checkoutUser = mysqli_fetch_assoc($result);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -59,7 +67,7 @@ if (isset($_POST['signupBTN'])) {
                         <li><a href="aboutUs.php">ABOUT US</a></li>
                     </ul>
             </nav>
-             <div class="Icons">
+            <div class="Icons">
                 <div class="searchBar">
                     <img src="assets/searchIcon.png" alt="Search Icon">
                     <input type="text" id="searchInput" placeholder="Search...">
@@ -91,7 +99,7 @@ if (isset($_POST['signupBTN'])) {
                     <p>Total: </p>
                     <span>₱0.00</span>
                 </div>
-                <a href="checkout.php" target="_blank"><button class="checkOutBtn">Proceed To Checkout</button></a>
+                <button class="checkOutBtn" onclick="goToCheckout()">Proceed To Checkout</button>
             </div>
 
             <div class="profileOverlay" id="profileOverlay"></div>
@@ -107,6 +115,86 @@ if (isset($_POST['signupBTN'])) {
                 </div>
             </div>
         </header>
+
+        <div class="checkoutModalOverlay" id="checkoutModalOverlay"></div>
+        <div class="checkoutModal" id="checkoutModal">
+            <div class="checkoutModalInner">
+                <div class="checkoutModalHeader">
+                    <h2>Checkout</h2>
+                    <span class="checkoutModalClose" id="checkoutModalClose">&times;</span>
+                </div>
+
+                <div class="checkoutModalBody">
+                    <div class="checkoutModalLeft">
+                        <?php if ($checkoutUser): ?>
+                            <div class="checkoutSection userInfo">
+                                <h3>Customer Information</h3>
+                                <p><strong>Full Name:</strong> <?php echo htmlspecialchars($checkoutUser['full_name']); ?></p>
+                                <p><strong>Contact No.:</strong> <?php echo htmlspecialchars($checkoutUser['contact_no']); ?></p>
+                                <p><strong>Email:</strong> <?php echo htmlspecialchars($checkoutUser['email']); ?></p>
+                                <p><strong>Address:</strong> <?php echo htmlspecialchars($checkoutUser['address']); ?></p>
+                            </div>
+                        <?php else: ?>
+                            <div class="checkoutSection userInfo">
+                                <p>Please <a href="login.php">log in</a> to continue.</p>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="checkoutSection paymentMethod">
+                            <h3>Payment Method</h3>
+                            <select id="paymentSelect" class="paymentSelect">
+                                <option value="cod">Cash on Delivery</option>
+                                <option value="gcash">Gcash</option>
+                            </select>
+
+                            <div class="gcashPanel" id="gcashPanel">
+                                <div class="gcashTitle">
+                                    GCash Payment Details
+                                </div>
+                                <div class="gcashRefBox">
+                                    Send payment to:<strong>+63 970 810 1973</strong><br>
+                                    Account Name: <strong>Bright E-Bikes</strong>
+                                </div>
+                                <label for="gcashNumber">Your GCash Number</label>
+                                <input
+                                    type="tel"
+                                    id="gcashNumber"
+                                    class="gcashNumberInput"
+                                    placeholder="e.g. 09XX XXX XXXX"
+                                    maxlength="11"
+                                    pattern="[0-9]*"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <button type="button" id="openGcashBtn" class="openGcashBtn">
+                                    Open GCash App to Pay
+                                </button>
+                                <p class="gcashNote">Make sure to send the exact total amount. Screenshot of payment will be required upon delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkoutModalRight">
+                        <div class="checkoutSection orderSummary">
+                            <h3>Order Summary</h3>
+                            <div class="checkoutHeader">
+                                <span>Product</span>
+                                <span>Qty</span>
+                                <span>Price</span>
+                            </div>
+                            <div id="checkoutModalItems"></div>
+                        </div>
+
+                        <div class="checkoutSection summary">
+                            <p>Subtotal: <span id="checkoutSubtotal">₱0</span></p>
+                            <p>Shipping Fee: <span id="checkoutShipping">₱50</span></p>
+                            <p><strong>Total: <span id="checkoutTotal">₱0</span></strong></p>
+                        </div>
+
+                        <button id="placeOrderBtn">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <section>
             <div class="Login">
                 <h1>Sign Up</h1>
@@ -143,4 +231,5 @@ if (isset($_POST['signupBTN'])) {
     </main>
 </body>
 <script src="script.js"></script>
+
 </html>
