@@ -2616,8 +2616,10 @@ footer {
         display: block;
         width: 60px;
         height: 60px;
-        background: url('assets/bright logo2 no bg.png') center/contain no-repeat;
+        background: url('assets/bright logo2.jpg') center/contain no-repeat;
         margin: 15px 0 10px 15px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 
     .navLinks ul {

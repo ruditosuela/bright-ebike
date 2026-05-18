@@ -134,10 +134,10 @@ $pendingOrders    = $pendingOrdersRow['total'];
                     while ($row = mysqli_fetch_assoc($salesResult)): ?>
                         <tr>
                             <td>#<?php echo $row['order_id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['full_name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['full_name']?? ''); ?></td>
                             <td>₱<?php echo number_format($row['total_amount']); ?></td>
                             <td><?php echo htmlspecialchars($row['status']); ?></td>
-                            <td><?php echo $row['created_at']; ?></td>
+                            <td><?php echo $row['created_at']?? ''; ?></td>
                         </tr>
                     <?php endwhile;
                 else: ?>
@@ -167,11 +167,11 @@ $pendingOrders    = $pendingOrdersRow['total'];
                     while ($row = mysqli_fetch_assoc($repairResult)): ?>
                         <tr>
                             <td><?php echo $row['id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['contact']); ?></td>
+                            <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['contact'] ?? ''); ?></td>
                             <td><?php echo $row['date']; ?></td>
-                            <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                            <td><?php echo htmlspecialchars($row['problem']); ?></td>
+                            <td><?php echo htmlspecialchars($row['branch'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['problem'] ?? ''); ?></td>
                             <td><?php echo $row['submitted_at']; ?></td>
                         </tr>
                     <?php endwhile;
@@ -202,11 +202,11 @@ $pendingOrders    = $pendingOrdersRow['total'];
                     while ($row = mysqli_fetch_assoc($maintenanceResult)): ?>
                         <tr>
                             <td><?php echo $row['id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['contact']); ?></td>
+                            <td><?php echo htmlspecialchars($row['first_name'] . ' ' . $row['last_name'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['contact'] ?? ''); ?></td>
                             <td><?php echo $row['date']; ?></td>
-                            <td><?php echo htmlspecialchars($row['branch']); ?></td>
-                            <td><?php echo htmlspecialchars($row['description']); ?></td>
+                            <td><?php echo htmlspecialchars($row['branch'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['description'] ?? ''); ?></td>
                             <td><?php echo $row['submitted_at']; ?></td>
                         </tr>
                     <?php endwhile;
@@ -231,9 +231,9 @@ $pendingOrders    = $pendingOrdersRow['total'];
                 <?php if (mysqli_num_rows($logResult) > 0):
                     while ($row = mysqli_fetch_assoc($logResult)): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($row['admin_user']); ?></td>
-                            <td><?php echo htmlspecialchars($row['action']); ?></td>
-                            <td><?php echo htmlspecialchars($row['description']); ?></td>
+                            <td><?php echo htmlspecialchars($row['admin_user']?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['action']?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($row['description']?? ''); ?></td>
                             <td><?php echo $row['created_at']; ?></td>
                         </tr>
                     <?php endwhile;

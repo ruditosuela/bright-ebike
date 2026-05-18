@@ -213,14 +213,14 @@ $reviewsResult = mysqli_query($conn, $reviewsQuery);
                     $hasReviews = true;
                     $stars = (int)$rev['rating'];
                     $starDisplay = str_repeat('★', $stars) . str_repeat('☆', 5 - $stars);
-                    $displayName = htmlspecialchars($rev['full_name'] ?: $rev['username']);
+                    $displayName = htmlspecialchars($rev['full_name'] ?: $rev['username'] ?? '');
                     $reviewDate = date('M d, Y', strtotime($rev['created_at']));
                     $shortText = mb_strlen($rev['review_text']) > 60 ? mb_strimwidth($rev['review_text'], 0, 60, '...') : $rev['review_text'];
                 ?>
                     <tr>
                         <td><?= $rev['review_id'] ?></td>
                         <td><?= $displayName ?></td>
-                        <td><?= htmlspecialchars($rev['product_name']) ?></td>
+                        <td><?= htmlspecialchars($rev['product_name']?? '') ?></td>
                         <td class="review-rating-cell">
                             <?= $starDisplay ?> <span class="review-rating-num">(<?= $stars ?>)</span>
                         </td>
@@ -231,10 +231,10 @@ $reviewsResult = mysqli_query($conn, $reviewsQuery);
                         <td>
                             <button class="edit-btn review-view-btn" onclick="openReviewModal(
                             '<?= $rev['review_id'] ?>',
-                            '<?= htmlspecialchars(addslashes($displayName)) ?>',
-                            '<?= htmlspecialchars(addslashes($rev['product_name'])) ?>',
+                            '<?= htmlspecialchars(addslashes($displayName)?? '') ?>',
+                            '<?= htmlspecialchars(addslashes($rev['product_name'])?? '') ?>',
                             '<?= $stars ?>',
-                            '<?= htmlspecialchars(addslashes($rev['review_text'])) ?>',
+                            '<?= htmlspecialchars(addslashes($rev['review_text'])?? '') ?>',
                             '<?= $reviewDate ?>'
                         )">View</button>
                         </td>

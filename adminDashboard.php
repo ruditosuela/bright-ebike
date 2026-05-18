@@ -134,9 +134,9 @@ $recentCustomersResult = mysqli_query($conn, "
                     <?php while ($order = mysqli_fetch_assoc($recentOrdersResult)): ?>
                         <tr data-status="<?php echo $order['status']; ?>">
                             <td>#<?php echo $order['order_id']; ?></td>
-                            <td><?php echo htmlspecialchars($order['full_name']); ?></td>
+                            <td><?php echo htmlspecialchars($order['full_name'] ?? ''); ?></td>
                             <td>₱<?php echo number_format($order['total_amount'], 2); ?></td>
-                            <td><?php echo htmlspecialchars($order['status']); ?></td>
+                            <td><?php echo htmlspecialchars($order['status'] ?? ''); ?></td>
                             <td><?php echo $order['created_at']; ?></td>
                         </tr>
                     <?php endwhile; ?>
@@ -166,8 +166,8 @@ $recentCustomersResult = mysqli_query($conn, "
                     <?php while ($product = mysqli_fetch_assoc($recentProductsResult)): ?>
                         <tr>
                             <td><?php echo $product['product_id']; ?></td>
-                            <td><?php echo htmlspecialchars($product['product_name']); ?></td>
-                            <td><?php echo htmlspecialchars($product['category']); ?></td>
+                            <td><?php echo htmlspecialchars($product['product_name'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($product['category'] ?? ''); ?></td>
                             <td>₱<?php echo number_format($product['price'], 2); ?></td>
                             <td><?php echo $product['quantity']; ?></td>
                         </tr>
@@ -197,10 +197,10 @@ $recentCustomersResult = mysqli_query($conn, "
                     <?php while ($customer = mysqli_fetch_assoc($recentCustomersResult)): ?>
                         <tr>
                             <td>#<?php echo $customer['user_id']; ?></td>
-                            <td><?php echo htmlspecialchars($customer['full_name']); ?></td>
-                            <td><?php echo htmlspecialchars($customer['email']); ?></td>
-                            <td><?php echo htmlspecialchars($customer['contact_no']) ?: 'N/A'; ?></td>
-                            <td><?php echo htmlspecialchars($customer['address']) ?: 'N/A'; ?></td>
+                            <td><?php echo htmlspecialchars($customer['full_name'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($customer['email'] ?? ''); ?></td>
+                            <td><?php echo htmlspecialchars($customer['contact_no'] ?? '') ?: 'N/A'; ?></td>
+                            <td><?php echo htmlspecialchars($customer['address'] ?? '') ?: 'N/A'; ?></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>

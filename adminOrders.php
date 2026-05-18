@@ -106,13 +106,13 @@ $result = mysqli_query($conn, $sql);
                     ?>
                     <tr data-status="<?php echo $order['status']; ?>">
                         <td>#<?php echo $order['order_id']; ?></td>
-                        <td><?php echo htmlspecialchars($order['full_name']); ?></td>
-                        <td><?php echo htmlspecialchars($order['email']); ?></td>
+                        <td><?php echo htmlspecialchars($order['full_name']?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($order['email']?? ''); ?></td>
                         <td>
                             ₱<?php echo number_format($order['total_amount']); ?>
                         </td>
                         <td>
-                            <?php echo htmlspecialchars($order['payment_method']); ?>
+                            <?php echo htmlspecialchars($order['payment_method']?? ''); ?>
                         </td>
                         <td>
                             <form method="POST">

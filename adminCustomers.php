@@ -79,10 +79,10 @@ $result = mysqli_query($conn, $sql);
                 <?php while ($customer = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                         <td>#<?php echo $customer['user_id']; ?></td>
-                        <td><?php echo htmlspecialchars($customer['full_name']); ?></td>
-                        <td><?php echo htmlspecialchars($customer['email']); ?></td>
-                        <td><?php echo htmlspecialchars($customer['contact_no']); ?></td>
-                        <td><?php echo htmlspecialchars($customer['address']); ?></td>
+                        <td><?php echo htmlspecialchars($customer['full_name'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($customer['email'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($customer['contact_no'] ?? ''); ?></td>
+                        <td><?php echo htmlspecialchars($customer['address'] ?? ''); ?></td>
                         <td><?php echo $customer['total_orders']; ?></td>
                         <td>
                             <button
