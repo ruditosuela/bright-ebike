@@ -88,6 +88,35 @@ $recentCustomersResult = mysqli_query($conn, "
         </ul>
     </div>
 
+    <div class="notif-wrapper" id="notifWrapper">
+        <button class="notif-bell-btn" id="notifBellBtn" onclick="toggleNotifDropdown()" aria-label="Notifications">
+            <img src="assets/notification.png" alt="Notifications" style="width:26px;height:26px;object-fit:contain;">
+            <span class="notif-badge" id="notifBadge">0</span>
+        </button>
+
+        <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-header">
+                <h4>Notifications</h4>
+                <button class="notif-mark-all" onclick="markAllRead()">Mark all as read</button>
+            </div>
+
+            <div class="notif-tabs">
+                <button class="notif-tab active" onclick="filterNotif(this,'all')">All</button>
+                <button class="notif-tab" onclick="filterNotif(this,'order')">Orders</button>
+                <button class="notif-tab" onclick="filterNotif(this,'repair')">Repair</button>
+                <button class="notif-tab" onclick="filterNotif(this,'maintenance')">Maintenance</button>
+            </div>
+
+            <div class="notif-list" id="notifList">
+                <div class="notif-empty"><span></span>Loading notifications…</div>
+            </div>
+
+            <div class="notif-footer">
+                <a href="adminOrders.php">View all orders</a>
+            </div>
+        </div>
+    </div>
+
     <div class="main-content">
 
         <!-- DASHBOARD HEADER -->
