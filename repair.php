@@ -265,7 +265,7 @@ if (isset($_SESSION['username'])) {
                         <input type="text" name="first_name" placeholder="First Name" required>
                         <input type="text" name="last_name" placeholder="Last Name" required>
                     </div>
-                    <input type="text" name="contact" placeholder="Contact Number" required>
+                    <input type="text" name="contact" maxlength="11" pattern="[0-9]{11}" placeholder="Contact Number" required>
                     <div class="datePicker">
                         <input type="date" name="date" required>
                     </div>
