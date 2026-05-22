@@ -459,6 +459,15 @@ profileBtn.addEventListener("click", () => {
 }); 
 }
 
+function toggleVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const img = btn.querySelector('img');
+    const isHidden = input.type === "password";
+    input.type = isHidden ? "text" : "password";
+    img.src = isHidden ? "assets/hide password.png" : "assets/show password.png";
+}
+
+
 //  FEATURED E-BIKES
 function filterBikes(type) {
     const bikes = document.querySelectorAll(".ebike-card");
@@ -544,17 +553,6 @@ if (two && three && four && twoDisplay && threeDisplay && fourDisplay && left &&
         fourDisplay.style.display = "flex";
     });
 
-    // left.addEventListener('click', () => {
-    //     if (two.classList.contains('TwoWheelerActive')) rotateLeft(twoDisplay);
-    //     else if (three.classList.contains('TwoWheelerActive')) rotateLeft(threeDisplay);
-    //     else if (four.classList.contains('TwoWheelerActive')) rotateLeft(fourDisplay);
-    // });
-
-    // right.addEventListener('click', () => {
-    //     if (two.classList.contains('TwoWheelerActive')) rotateRight(twoDisplay);
-    //     else if (three.classList.contains('TwoWheelerActive')) rotateRight(threeDisplay);
-    //     else if (four.classList.contains('TwoWheelerActive')) rotateRight(fourDisplay);
-    // });
         function isMobile() {
         return window.innerWidth <= 768;
     }
@@ -841,4 +839,131 @@ function showReviewMsg(text, type) {
     reviewMsgEl.textContent = text;
     reviewMsgEl.className = 'reviewMsg ' + type;
     reviewMsgEl.style.display = 'block';
+}
+
+
+document.querySelectorAll('.tabBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tabBtn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tabPane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+});
+
+const statusStyles = {
+    pending:    { bg: '#fff4cc', color: '#a07800', border: '#f0d060', label: 'Pending'    },
+    processing: { bg: '#ddeeff', color: '#0055aa', border: '#99ccff', label: 'Processing' },
+    shipped:    { bg: '#e0f0ff', color: '#005fa3', border: '#80c4f0', label: 'Shipped'    },
+    completed:  { bg: '#e6f9ee', color: '#1a7a3f', border: '#b2dfc5', label: 'Completed'  },
+    cancelled:  { bg: '#fde8e8', color: '#7a1a1a', border: '#f0b0b0', label: 'Cancelled'  },
+};
+ 
+function openOrderModal(index) {
+    const order    = ordersData[index];
+    const orderNum = totalOrders - index;
+    const s        = (order.status || 'pending').toLowerCase();
+    const sc       = statusStyles[s] || statusStyles['pending'];
+ 
+    const badgeStyle = [
+        `display:inline-block`,
+        `padding:4px 14px`,
+        `border-radius:20px`,
+        `font-size:11px`,
+        `font-weight:700`,
+        `text-transform:uppercase`,
+        `letter-spacing:0.5px`,
+        `background:${sc.bg}`,
+        `color:${sc.color}`,
+        `border:1px solid ${sc.border}`,
+    ].join(';');
+ 
+    const d       = new Date(order.created_at.replace(' ', 'T'));
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+                  + '  '
+                  + d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+ 
+    let itemRows = '';
+    (order.items || []).forEach(item => {
+        const subtotal = (parseFloat(item.price) * parseInt(item.quantity)).toFixed(2);
+        itemRows += `
+            <tr>
+                <td>${item.product_name}</td>
+                <td>${item.quantity}</td>
+                <td>&#8369;${parseFloat(item.price).toFixed(2)}</td>
+                <td>&#8369;${subtotal}</td>
+            </tr>`;
+    });
+ 
+    const payMethod = order.payment_method
+        ? order.payment_method.charAt(0).toUpperCase() + order.payment_method.slice(1)
+        : '—';
+ 
+    document.getElementById('modalDetail').innerHTML = `
+        <p><strong>Order Number:</strong> Order ${orderNum}</p>
+        <p><strong>Customer Name:</strong> ${customerName}</p>
+        <p><strong>Email:</strong> ${customerEmail}</p>
+        <p><strong>Payment Method:</strong> ${payMethod}</p>
+        <p><strong>Status:</strong> <span style="${badgeStyle}">${sc.label}</span></p>
+        <p><strong>Order Date:</strong> ${dateStr}</p>
+        <div class="modalItemsTitle">Items Ordered</div>
+        <table class="modalItemsTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>${itemRows}</tbody>
+        </table>
+        <div class="modalTotal">Total: &#8369;${parseFloat(order.total_amount).toFixed(2)}</div>
+    `;
+ 
+    document.getElementById('orderModal').classList.add('open');
+}
+ 
+function closeOrderModal() {
+    const modal = document.getElementById('orderModal');
+    if (modal) modal.classList.remove('open');
+}
+
+const orderModal = document.getElementById('orderModal');
+if (orderModal) {
+    orderModal.addEventListener('click', function (e) {
+        if (e.target === this) closeOrderModal();
+    });
+}
+
+
+//REMEMBER ME 
+const rememberMe = document.getElementById('rememberMe');
+const usernameInput = document.querySelector('input[name="username"]');
+
+if (rememberMe && usernameInput) {
+    const savedUsername = localStorage.getItem('rememberedUsername');
+    if (savedUsername) {
+        usernameInput.value = savedUsername;
+        rememberMe.checked = true;
+    }
+
+    rememberMe.addEventListener('change', () => {
+        if (rememberMe.checked) {
+            localStorage.setItem('rememberedUsername', usernameInput.value);
+        } else {
+            localStorage.removeItem('rememberedUsername');
+        }
+    });
+
+    const loginForm = document.querySelector('.Login form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', () => {
+            if (rememberMe.checked) {
+                localStorage.setItem('rememberedUsername', usernameInput.value);
+            } else {
+                localStorage.removeItem('rememberedUsername');
+            }
+        });
+    }
 }

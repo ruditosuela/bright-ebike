@@ -69,19 +69,19 @@ function openReviewModal(id, customer, product, rating, text, date) {
     document.getElementById("modalReviewProduct").innerText = product;
     document.getElementById("modalReviewDate").innerText = date;
     document.getElementById("modalReviewText").innerText = text;
- 
+
     const stars = parseInt(rating);
-   document.getElementById("modalReviewStars").innerHTML =
-    '★'.repeat(stars) + '☆'.repeat(5 - stars) + 
-    '<span style="color: black;">  (' + stars + '/5)</span>';
- 
+    document.getElementById("modalReviewStars").innerHTML =
+        '★'.repeat(stars) + '☆'.repeat(5 - stars) +
+        '<span style="color: black;">  (' + stars + '/5)</span>';
+
     document.getElementById("reviewModal").style.display = "flex";
 }
- 
+
 function closeReviewModal() {
     document.getElementById("reviewModal").style.display = "none";
 }
- 
+
 window.addEventListener("click", function (event) {
     const modal = document.getElementById("reviewModal");
     if (modal && event.target === modal) {
@@ -91,7 +91,7 @@ window.addEventListener("click", function (event) {
 
 //ORDER MANAGEMENT FUNCTION
 //View orders
-function openViewOrder(orderId, customer, email, payment, status, date, total){
+function openViewOrder(orderId, customer, email, payment, status, date, total) {
 
     document.getElementById("viewOrderModal").style.display = "flex";
     // ORDER INFO
@@ -105,43 +105,43 @@ function openViewOrder(orderId, customer, email, payment, status, date, total){
     `;
 
     // ITEMS
-   fetch(`fetchOrderItems.php?order_id=${orderId}`)
-    .then(res => res.json())
-    .then(items => {
+    fetch(`fetchOrderItems.php?order_id=${orderId}`)
+        .then(res => res.json())
+        .then(items => {
 
-        const tbody = document.getElementById("orderItemsBody");
-        tbody.innerHTML = "";
+            const tbody = document.getElementById("orderItemsBody");
+            tbody.innerHTML = "";
 
-        let subtotal = 0;
+            let subtotal = 0;
 
-        items.forEach(item => {
+            items.forEach(item => {
 
-            const qty = Number(item.quantity);
-            const price = Number(item.price);
+                const qty = Number(item.quantity);
+                const price = Number(item.price);
 
-            subtotal += qty * price;
+                subtotal += qty * price;
 
-            tbody.innerHTML += `
+                tbody.innerHTML += `
                 <tr>
                     <td>${item.product_name}</td>
                     <td>${qty}</td>
                     <td>₱${price.toLocaleString()}</td>
                 </tr>
             `;
+            });
+
+            const shipping = 50;
+            const grandTotal = subtotal + shipping;
+
+            document.getElementById("subtotalLine").innerHTML =
+                `<strong>Subtotal:</strong> ₱${subtotal.toLocaleString()}`;
+
+            document.getElementById("shippingLine").innerHTML =
+                `<strong>Shipping Fee:</strong> ₱${shipping.toLocaleString()}`;
+
+            document.getElementById("totalLine").innerHTML =
+                `<strong>Total:</strong> ₱${grandTotal.toLocaleString()}`;
         });
-
-        const shipping = 50;
-        const grandTotal = subtotal + shipping;
-
-        document.getElementById("subtotalLine").innerHTML =
-            `<strong>Subtotal:</strong> ₱${subtotal.toLocaleString()}`;
-
-        document.getElementById("shippingLine").innerHTML =
-            `<strong>Shipping Fee:</strong> ₱${shipping.toLocaleString()}`;
-
-        document.getElementById("totalLine").innerHTML =
-            `<strong>Total:</strong> ₱${grandTotal.toLocaleString()}`;
-    });
     // SUMMARY
 }
 
@@ -280,3 +280,149 @@ window.addEventListener("click", function (event) {
         modal.style.display = "none";
     }
 });
+
+
+
+
+
+//Admin Notifications
+(function () {
+    /* ── state ── */
+    let allNotifications = [];
+    let readIds = new Set(JSON.parse(localStorage.getItem('adminReadNotifs') || '[]'));
+    let currentFilter = 'all';
+    let dropdownOpen = false;
+    let prevCount = 0;
+
+    /* ── helpers ── */
+    function timeAgo(dateStr) {
+        const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
+        if (diff < 60) return diff + 's ago';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        return Math.floor(diff / 86400) + 'd ago';
+    }
+
+    function notifKey(n) {
+        return n.type + '_' + n.title + '_' + n.time;
+    }
+
+    /* ── fetch from PHP ── */
+    function fetchNotifications() {
+        fetch('adminNotifications.php')
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) return;
+                allNotifications = data.notifications || [];
+
+                const unreadCount = allNotifications.filter(n => !readIds.has(notifKey(n))).length;
+
+                // update badge
+                const badge = document.getElementById('notifBadge');
+                badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+                badge.classList.toggle('visible', unreadCount > 0);
+
+                // shake bell on new arrivals
+                if (unreadCount > prevCount && prevCount !== 0) {
+                    const btn = document.getElementById('notifBellBtn');
+                    btn.classList.add('shake');
+                    setTimeout(() => btn.classList.remove('shake'), 600);
+                }
+                prevCount = unreadCount;
+
+                // re-render if dropdown is already open
+                if (dropdownOpen) renderList();
+            })
+            .catch(() => { });
+    }
+
+    /* ── render list ── */
+    function renderList() {
+        const list = document.getElementById('notifList');
+        const visible = currentFilter === 'all'
+            ? allNotifications
+            : allNotifications.filter(n => n.type === currentFilter);
+
+        if (!visible.length) {
+            list.innerHTML = '<div class="notif-empty"><span></span>No pending '
+                + (currentFilter === 'all' ? '' : currentFilter)
+                + ' notifications.</div>';
+            return;
+        }
+
+        list.innerHTML = visible.map(n => {
+            const key = notifKey(n);
+            const unread = !readIds.has(key);
+            return '<a class="notif-item ' + (unread ? 'unread' : '') + '" href="' + n.link + '" onclick="markRead(\'' + key.replace(/'/g, "\\'") + '\')">'
+                + '<div class="notif-icon ' + n.type + '">' + n.icon + '</div>'
+                + '<div class="notif-body">'
+                + '<strong>' + n.title + '</strong>'
+                + '<span>' + n.message + '</span>'
+                + '</div>'
+                + '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'
+                + '<span class="notif-time">' + timeAgo(n.time) + '</span>'
+                + (unread ? '<div class="notif-unread-dot"></div>' : '')
+                + '</div>'
+                + '</a>';
+        }).join('');
+    }
+
+    /* ── public functions (called from HTML onclick attributes) ── */
+    window.toggleNotifDropdown = function () {
+        const dd = document.getElementById('notifDropdown');
+        dropdownOpen = !dropdownOpen;
+        dd.classList.toggle('open', dropdownOpen);
+        if (dropdownOpen) renderList();
+    };
+
+    window.filterNotif = function (btn, filter) {
+        document.querySelectorAll('.notif-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+
+        currentFilter = filter;
+
+        // Change footer link dynamically
+        const footerLink = document.querySelector('.notif-footer a');
+
+        if (filter === 'order' || filter === 'all') {
+            footerLink.href = 'adminOrders.php';
+            footerLink.textContent = 'View all orders';
+        }
+        else if (filter === 'repair') {
+            footerLink.href = 'adminReports.php';
+            footerLink.textContent = 'View all repairs';
+        }
+        else if (filter === 'maintenance') {
+            footerLink.href = 'adminReports.php';
+            footerLink.textContent = 'View all maintenance';
+        }
+
+        renderList();
+    };
+
+    window.markRead = function (key) {
+        readIds.add(key);
+        localStorage.setItem('adminReadNotifs', JSON.stringify([...readIds]));
+        fetchNotifications();
+    };
+
+    window.markAllRead = function () {
+        allNotifications.forEach(n => readIds.add(notifKey(n)));
+        localStorage.setItem('adminReadNotifs', JSON.stringify([...readIds]));
+        fetchNotifications();
+        renderList();
+    };
+
+    /* ── close when clicking outside the dropdown ── */
+    document.addEventListener('click', function (e) {
+        const wrapper = document.getElementById('notifWrapper');
+        if (dropdownOpen && wrapper && !wrapper.contains(e.target)) {
+            document.getElementById('notifDropdown').classList.remove('open');
+            dropdownOpen = false;
+        }
+    });
+
+    /* ── init: fetch immediately, then every 30 seconds ── */
+    fetchNotifications();
+    setInterval(fetchNotifications, 30000);
+})();

@@ -211,7 +211,10 @@ if (isset($_POST['LoginBtn'])) {
                     </div>
 
                     <div class="Password">
-                        <input type="password" name="password" minlength="6" placeholder="Password" required>
+                        <input type="password" name="password" id="loginPassword" minlength="6" placeholder="Password" required>
+                        <span class="togglePassword" onclick="toggleVisibility('loginPassword', this)">
+                            <img src="assets/show password.png" alt="Show Password" width="18" height="18">
+                        </span>
                     </div>
 
                     <div class="checkboxPassword">

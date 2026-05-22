@@ -209,14 +209,18 @@ if (isset($_POST['signupBTN'])) {
                     </div>
 
                     <div class="Password">
-                        <input type="password" name="password" id="password" minlength="6" placeholder="Password" required>
+                        <input type="password" name="password" id="signupPassword" minlength="6" placeholder="Password" required>
+                        <span class="togglePassword" onclick="toggleVisibility('signupPassword', this)">
+                            <img src="assets/show password.png" alt="Show Password" width="18" height="18">
+                        </span>
                     </div>
 
                     <div class="Password">
-                        <input type="password" name="confirmPassword" id="confirmPassword" minlength="6" placeholder="Confirm Password"
-                            required>
+                        <input type="password" name="confirmPassword" id="confirmPassword" minlength="6" placeholder="Confirm Password" required>
+                        <span class="togglePassword" onclick="toggleVisibility('confirmPassword', this)">
+                            <img src="assets/show password.png" alt="Show Password" width="18" height="18">
+                        </span>
                     </div>
-
                     <div>
                         <button class="LoginBTN" name="signupBTN" type="submit">Sign Up</button>
                     </div>

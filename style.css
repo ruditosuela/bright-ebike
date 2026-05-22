@@ -788,75 +788,458 @@ nav {
     display: flex;
 }
 
-/* ACCOUNT DETAILS */
-.accountContainer {
-    width: 420px;
-    margin: 60px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.Password {
+    position: relative;
 }
 
+.Password input {
+    padding-right: 40px;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+    color: #888;
+}   
+
+
+
+
+
+
+/* ACCOUNT DETAILS */
+.accountPageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 60px;
+    min-height: 80vh;
+}
+ 
+.tabNav {
+    display: flex;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    overflow: hidden;
+    margin-bottom: 32px;
+    width: 100%;
+    max-width: 860px;
+}
+ 
+.tabBtn {
+    flex: 1;
+    padding: 16px 20px;
+    border: none;
+    background: #fff;
+    color: #888;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    letter-spacing: 0.3px;
+}
+ 
+.tabBtn:hover {
+    color: #6b0303;
+    background: #fdf5f5;
+}
+ 
+.tabBtn.active {
+    color: #6b0303;
+    border-bottom: 3px solid #6b0303;
+    background: #fdf5f5;
+}
+ 
+.tabPane {
+    display: none;
+    width: 100%;
+    max-width: 860px;
+}
+ 
+.tabPane.active {
+    display: block;
+}
+
+.accountContainer {
+    background: white;
+    padding: 36px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+    width: 100%;
+    box-sizing: border-box;
+}
+ 
 .accountContainer h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
     color: #6b0303;
+    font-size: 1.6rem;
 }
-
+ 
+.profilePicSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+ 
+.profilePicPreview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #f0d5d5;
+    box-shadow: 0 4px 12px rgba(107, 3, 3, 0.12);
+}
+ 
+.changePicBtn {
+    background-color: #6b0303;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+ 
+.changePicBtn:hover {
+    background-color: #4d0202;
+}
+ 
+.accountInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+ 
 .accountInfo p {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 15px 0;
-    font-size: 16px;
-}
-
-.accountInfo strong {
-    /* color: #6b0303; */
-    min-width: 120px;
-}
-
-.editableField input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    gap: 12px;
+    margin: 10px 0;
     font-size: 15px;
 }
-
-.saveBtn,
-.backBtn {
+ 
+.accountInfo strong {
+    min-width: 120px;
+    color: #555;
+}
+ 
+.editableField input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 7px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: border 0.2s;
+}
+ 
+.editableField input:focus {
+    outline: none;
+    border-color: #6b0303;
+}
+ 
+.saveBtn {
     display: block;
     width: 100%;
-    padding: 12px;
-    margin-top: 15px;
+    padding: 13px;
+    margin-top: 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #27ae60;
     color: white;
-    font-weight: bold;
-    text-decoration: none;
+    font-weight: 700;
     text-align: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    transition: background 0.2s;
 }
-
-.saveBtn {
-    background-color: #27ae60;
-}
-
+ 
 .saveBtn:hover {
     background-color: #1e8449;
 }
-
+ 
 .backBtn {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
     background: #6b0303;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    transition: background 0.2s;
 }
-
+ 
 .backBtn:hover {
     background: #4d0202;
 }
+ 
+.purchaseHistorySection {
+    background: white;
+    padding: 36px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+    width: 100%;
+    box-sizing: border-box;
+}
+ 
+.purchaseHistorySection h2 {
+    color: #6b0303;
+    margin-bottom: 24px;
+    font-size: 1.4rem;
+}
+ 
+.orderCard {
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+ 
+.orderCard:hover {
+    box-shadow: 0 4px 18px rgba(107, 3, 3, 0.10);
+}
+ 
+.orderCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+ 
+.orderNum {
+    font-weight: 700;
+    font-size: 14px;
+    color: #6b0303;
+}
+ 
+.orderDate {
+    font-size: 12px;
+    color: #999;
+}
+ 
+.orderCardBody {
+    padding: 16px 20px;
+}
+ 
+.orderItemsTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+ 
+.orderItemsTable th {
+    text-align: left;
+    padding: 8px 10px;
+    background: #6b0303;
+    color: #fff;
+    font-size: 12px;
+}
+ 
+.orderItemsTable td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+ 
+.orderItemsTable tr:last-child td {
+    border-bottom: none;
+}
+ 
+.orderItemsTable tr:nth-child(even) td {
+    background: #fafafa;
+}
+ 
+.orderCardFooter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 12px 20px;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+}
+ 
+.orderTotal {
+    font-weight: 700;
+    font-size: 15px;
+    color: #6b0303;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+ 
+.statusBadge.pending    { background: #fff4cc; color: #a07800; border: 1px solid #f0d060; }
+.statusBadge.processing { background: #ddeeff; color: #0055aa; border: 1px solid #99ccff; }
+.statusBadge.shipped    { background: #e0f0ff; color: #005fa3; border: 1px solid #80c4f0; }
+.statusBadge.completed  { background: #e6f9ee; color: #1a7a3f; border: 1px solid #b2dfc5; }
+.statusBadge.cancelled  { background: #fde8e8; color: #7a1a1a; border: 1px solid #f0b0b0; }
+ 
+.noOrders {
+    text-align: center;
+    padding: 50px 20px;
+    color: #bbb;
+}
+ 
+.noOrders .noOrdersIcon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+ 
+.noOrders p {
+    font-size: 14px;
+}
+ 
+.modalOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.modalOverlay.open {
+    display: flex;
+}
+ 
+.modalBox {
+    background: #fff;
+    border-radius: 14px;
+    padding: 36px 36px 28px;
+    width: 420px;
+    max-width: 95vw;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    position: relative;
+    animation: modalIn 0.22s ease;
+}
+ 
+@keyframes modalIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+ 
+.modalClose {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 22px;
+    color: #c0392b;
+    cursor: pointer;
+    line-height: 1;
+    font-weight: 700;
+    background: none;
+    border: none;
+}
+ 
+.modalClose:hover {
+    color: #7a0000;
+}
+ 
+.modalBox h2 {
+    color: #1a1a1a;
+    font-size: 1.25rem;
+    margin-bottom: 22px;
+    font-family: 'Poppins', sans-serif;
+}
+ 
+.modalDetail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+ 
+.modalDetail p {
+    margin: 0;
+    display: flex;
+    gap: 8px;
+}
+ 
+.modalDetail strong {
+    min-width: 145px;
+    color: #555;
+}
+ 
+.modalItemsTitle {
+    font-weight: 700;
+    color: #6b0303;
+    margin: 14px 0 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+ 
+.modalItemsTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+ 
+.modalItemsTable th {
+    background: #6b0303;
+    color: #fff;
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 11px;
+}
+ 
+.modalItemsTable td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+ 
+.modalItemsTable tr:last-child td {
+    border-bottom: none;
+}
+ 
+.modalTotal {
+    margin-top: 16px;
+    text-align: right;
+    font-weight: 700;
+    color: #6b0303;
+    font-size: 15px;
+}
+
 
 /* LOGIN */
 section {
@@ -927,6 +1310,9 @@ section {
     font-weight: bold;
 }
 
+.checkboxPassword input[type="checkbox"] {
+    accent-color: #6b0303;
+}
 
 /* SIGNUP */
 /* HOMEPAGE CONTENT */
@@ -3687,6 +4073,251 @@ footer {
 
     .privacy-section {
         margin-bottom: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+ 
+    .tabNav {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+ 
+    .tabBtn {
+        font-size: 13px;
+        padding: 13px 10px;
+    }
+ 
+    .tabPane {
+        max-width: 100%;
+    }
+ 
+    .purchaseHistorySection {
+        padding: 24px 16px;
+        border-radius: 10px;
+    }
+ 
+    .purchaseHistorySection h2 {
+        font-size: 1.15rem;
+        margin-bottom: 16px;
+    }
+ 
+    .orderCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 12px 14px;
+    }
+ 
+    .orderCardBody {
+        padding: 12px 14px;
+    }
+ 
+    .orderCardFooter {
+        padding: 10px 14px;
+    }
+ 
+    .orderItemsTable th,
+    .orderItemsTable td {
+        padding: 7px 6px;
+        font-size: 12px;
+    }
+ 
+    .orderTotal {
+        font-size: 13px;
+    }
+ 
+    .modalBox {
+        padding: 28px 20px 22px;
+        width: 92%;
+        border-radius: 12px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+ 
+    .modalBox h2 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+    }
+ 
+    .modalDetail {
+        font-size: 13px;
+        gap: 8px;
+    }
+ 
+    .modalDetail strong {
+        min-width: 120px;
+    }
+ 
+    .modalItemsTable th,
+    .modalItemsTable td {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+ 
+    .modalTotal {
+        font-size: 13px;
+        margin-top: 12px;
+    }
+}
+ 
+@media (max-width: 480px) {
+ 
+    .tabBtn {
+        font-size: 12px;
+        padding: 11px 8px;
+    }
+ 
+    .purchaseHistorySection {
+        padding: 18px 12px;
+    }
+ 
+    .orderItemsTable th,
+    .orderItemsTable td {
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+ 
+    .orderNum {
+        font-size: 13px;
+    }
+ 
+    .orderDate {
+        font-size: 11px;
+    }
+ 
+    .modalOverlay.open {
+        align-items: flex-end;
+    }
+ 
+    .modalBox {
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-height: 92vh;
+        overflow-y: auto;
+        padding: 24px 16px 20px;
+    }
+ 
+    .modalDetail {
+        font-size: 12px;
+    }
+ 
+    .modalDetail strong {
+        min-width: 110px;
+    }
+ 
+    .modalItemsTable th,
+    .modalItemsTable td {
+        padding: 5px 4px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+ 
+    .accountPageWrapper {
+        padding: 20px 10px 40px;
+    }
+ 
+    .tabNav {
+        max-width: 100%;
+    }
+ 
+    .tabPane {
+        max-width: 100%;
+    }
+ 
+    .accountContainer {
+        padding: 24px 16px;
+        border-radius: 10px;
+    }
+ 
+    .accountContainer h1 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+ 
+    .profilePicPreview {
+        width: 100px;
+        height: 100px;
+    }
+ 
+    .accountInfo p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 14px;
+        margin: 8px 0;
+    }
+ 
+    .accountInfo strong {
+        min-width: unset;
+    }
+ 
+    .editableField input {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+ 
+    .saveBtn,
+    .backBtn {
+        font-size: 14px;
+        padding: 11px;
+    }
+ 
+    .changePicBtn {
+        font-size: 12px;
+        padding: 7px 16px;
+    }
+}
+ 
+@media (max-width: 480px) {
+ 
+    .accountPageWrapper {
+        padding: 15px 8px 30px;
+    }
+ 
+    .accountContainer {
+        padding: 18px 12px;
+    }
+ 
+    .accountContainer h1 {
+        font-size: 1.15rem;
+        margin-bottom: 16px;
+    }
+ 
+    .profilePicPreview {
+        width: 85px;
+        height: 85px;
+    }
+ 
+    .changePicBtn {
+        font-size: 11px;
+        padding: 6px 14px;
+    }
+ 
+    .accountInfo p {
+        font-size: 13px;
+        margin: 6px 0;
+    }
+ 
+    .editableField input {
+        font-size: 12px;
+        padding: 7px 9px;
+    }
+ 
+    .saveBtn,
+    .backBtn {
+        font-size: 13px;
+        padding: 10px;
+        margin-top: 12px;
     }
 }
 
