@@ -15,9 +15,15 @@ if (isset($_POST['addProduct'])) {
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
 
-    $imageName = $_FILES['image']['name'];
+    $uploadDir = __DIR__ . "/assets/";
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $imageName = basename($_FILES['image']['name']); 
     $imageTmp  = $_FILES['image']['tmp_name'];
-    move_uploaded_file($imageTmp, "assets/" . $imageName);
+    move_uploaded_file($imageTmp, $uploadDir . $imageName);
 
     $productTable = "INSERT INTO product (product_name, price, category, image)
                      VALUES ('$name', '$price', '$category', '$imageName')";
@@ -44,14 +50,17 @@ if (isset($_POST['updateProduct'])) {
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
 
-    // GET OLD VALUES for comparison
-    $oldRow = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM product WHERE product_id='$id'"));
+    $uploadDir = __DIR__ . "/assets/";
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+
+
+    $oldRow   = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM product WHERE product_id='$id'"));
     $oldStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT quantity FROM stocks WHERE product_id='$id'"));
 
     if (!empty($_FILES['image']['name'])) {
-        $imageName = $_FILES['image']['name'];
+        $imageName = basename($_FILES['image']['name']);
         $imageTmp  = $_FILES['image']['tmp_name'];
-        move_uploaded_file($imageTmp, "assets/" . $imageName);
+        move_uploaded_file($imageTmp, $uploadDir . $imageName);
 
         mysqli_query($conn, "UPDATE product 
             SET product_name='$name', category='$category', price='$price', image='$imageName'
@@ -64,12 +73,11 @@ if (isset($_POST['updateProduct'])) {
 
     mysqli_query($conn, "UPDATE stocks SET quantity='$stock' WHERE product_id='$id'");
 
-    // Build specific log description showing what changed
     $changes = [];
-    if ($oldRow['product_name'] != $name)     $changes[] = "Name: {$oldRow['product_name']} → $name";
-    if ($oldRow['category'] != $category)     $changes[] = "Category: {$oldRow['category']} → $category";
-    if ($oldRow['price'] != $price)           $changes[] = "Price: ₱{$oldRow['price']} → ₱$price";
-    if ($oldStock['quantity'] != $stock)      $changes[] = "Stock: {$oldStock['quantity']} → $stock";
+    if ($oldRow['product_name'] != $name)   $changes[] = "Name: {$oldRow['product_name']} → $name";
+    if ($oldRow['category'] != $category)   $changes[] = "Category: {$oldRow['category']} → $category";
+    if ($oldRow['price'] != $price)         $changes[] = "Price: ₱{$oldRow['price']} → ₱$price";
+    if ($oldStock['quantity'] != $stock)    $changes[] = "Stock: {$oldStock['quantity']} → $stock";
 
     $changeText = !empty($changes) ? implode(', ', $changes) : 'No changes detected';
     $desc = "Updated product ID #$id ($name): $changeText";
