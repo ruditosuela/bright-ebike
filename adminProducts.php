@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+$uploadDir = __DIR__ . "/assets/";
+echo "Dir exists: " . (is_dir($uploadDir) ? 'YES' : 'NO') . "<br>";
+echo "Writable: " . (is_writable($uploadDir) ? 'YES' : 'NO') . "<br>";
+echo "Owner: "; system('ls -la ' . escapeshellarg(__DIR__));
+die();
+
 if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
