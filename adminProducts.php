@@ -18,12 +18,17 @@ if (isset($_POST['addProduct'])) {
     $uploadDir = __DIR__ . "/assets/";
 
     if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true);
+        mkdir($uploadDir, 0777, true);
     }
+
+    chmod($uploadDir, 0777);
 
     $imageName = basename($_FILES['image']['name']); 
     $imageTmp  = $_FILES['image']['tmp_name'];
-    move_uploaded_file($imageTmp, $uploadDir . $imageName);
+
+    if (!move_uploaded_file($imageTmp, $uploadDir . $imageName)) {
+    error_log("Upload failed: " . $uploadDir . $imageName);
+    }
 
     $productTable = "INSERT INTO product (product_name, price, category, image)
                      VALUES ('$name', '$price', '$category', '$imageName')";
@@ -51,7 +56,8 @@ if (isset($_POST['updateProduct'])) {
     $stock    = $_POST['stock'];
 
     $uploadDir = __DIR__ . "/assets/";
-    if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+    chmod($uploadDir, 0777);
 
 
     $oldRow   = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM product WHERE product_id='$id'"));
