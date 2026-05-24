@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-$uploadDir = __DIR__ . "/assets/";
-echo "Dir exists: " . (is_dir($uploadDir) ? 'YES' : 'NO') . "<br>";
-echo "Writable: " . (is_writable($uploadDir) ? 'YES' : 'NO') . "<br>";
-echo "Owner: "; system('ls -la ' . escapeshellarg(__DIR__));
-die();
-
 if (!isset($_SESSION['admin'])) {
     header("Location: login.php");
     exit();
@@ -22,7 +16,7 @@ if (isset($_POST['addProduct'])) {
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
 
-    $uploadDir = __DIR__ . "/assets/";
+    $uploadDir = __DIR__ . "/uploads/";
 
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);
@@ -62,7 +56,7 @@ if (isset($_POST['updateProduct'])) {
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
 
-    $uploadDir = __DIR__ . "/assets/";
+    $uploadDir = __DIR__ . "/uploads/";
     if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
     chmod($uploadDir, 0777);
 

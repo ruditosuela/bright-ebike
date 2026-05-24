@@ -17,6 +17,6 @@ RUN mkdir -p /var/www/html/uploads/profiles
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/uploads
-RUN chmod -R 755 /var/www/html/uploads
+RUN chmod -R 777 /var/www/html/uploads
 
 EXPOSE 80
