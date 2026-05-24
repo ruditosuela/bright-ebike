@@ -223,7 +223,15 @@ if (isset($_SESSION['username'])) {
           data-price="<?php echo $row['price']; ?>">
 
           <?php
-          $imagePath = (!empty($row['image'])) ? "assets/" . $row['image'] : "assets/default-bike.png";
+          if (!empty($row['image'])) {
+              if (file_exists("uploads/" . $row['image'])) {
+                $imagePath = "uploads/" . $row['image'];
+              } else {
+                $imagePath = "assets/" . $row['image'];
+              }
+          } else {
+            $imagePath = "assets/default-bike.png";
+          }
           ?>
           <img src="<?php echo $imagePath; ?>" class="ebike-image">
 
