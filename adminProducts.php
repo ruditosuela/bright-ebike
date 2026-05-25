@@ -56,13 +56,12 @@ if (isset($_POST['updateProduct'])) {
     $price    = $_POST['price'];
     $stock    = $_POST['stock'];
 
-    $uploadDir = __DIR__ . "/uploads/";
-    if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
-    chmod($uploadDir, 0777);
+    $uploadDir = __DIR__ . "/assets/";
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
-
-    $oldRow   = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM product WHERE product_id='$id'"));
-    $oldStock = mysqli_fetch_assoc(mysqli_query($conn, "SELECT quantity FROM stocks WHERE product_id='$id'"));
+    $oldRow      = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM product WHERE product_id='$id'"));
+    $oldStockRes = mysqli_query($conn, "SELECT quantity FROM stocks WHERE product_id='$id'");
+    $oldStock    = $oldStockRes ? mysqli_fetch_assoc($oldStockRes) : null; // ← safe fetch
 
     if (!empty($_FILES['image']['name'])) {
         $imageName = basename($_FILES['image']['name']);
@@ -78,13 +77,14 @@ if (isset($_POST['updateProduct'])) {
             WHERE product_id='$id'");
     }
 
-    mysqli_query($conn, "UPDATE stocks SET quantity='$stock' WHERE product_id='$id'");
+    mysqli_query($conn, "INSERT INTO stocks (product_id, quantity) VALUES ('$id', '$stock')
+                         ON DUPLICATE KEY UPDATE quantity='$stock'");
 
     $changes = [];
-    if ($oldRow['product_name'] != $name)   $changes[] = "Name: {$oldRow['product_name']} → $name";
-    if ($oldRow['category'] != $category)   $changes[] = "Category: {$oldRow['category']} → $category";
-    if ($oldRow['price'] != $price)         $changes[] = "Price: ₱{$oldRow['price']} → ₱$price";
-    if ($oldStock['quantity'] != $stock)    $changes[] = "Stock: {$oldStock['quantity']} → $stock";
+    if ($oldRow && $oldRow['product_name'] != $name)     $changes[] = "Name: {$oldRow['product_name']} → $name";
+    if ($oldRow && $oldRow['category']     != $category) $changes[] = "Category: {$oldRow['category']} → $category";
+    if ($oldRow && $oldRow['price']        != $price)    $changes[] = "Price: ₱{$oldRow['price']} → ₱$price";
+    if ($oldStock && $oldStock['quantity'] != $stock)    $changes[] = "Stock: {$oldStock['quantity']} → $stock"; // ← null-guarded
 
     $changeText = !empty($changes) ? implode(', ', $changes) : 'No changes detected';
     $desc = "Updated product ID #$id ($name): $changeText";
@@ -92,7 +92,6 @@ if (isset($_POST['updateProduct'])) {
     mysqli_query($conn, "INSERT INTO activity_log (admin_user, action, description)
                          VALUES ('$admin', 'Updated Product', '$desc')");
 }
-
 
 // FETCH PRODUCTS
 $query = "

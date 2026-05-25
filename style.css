@@ -2150,6 +2150,7 @@ footer {
 .aboutLeft img {
     width: 400px;
     height: auto;
+    border-radius: 20px;
 }
 
 .aboutRight {
@@ -4423,4 +4424,39 @@ footer {
         width: 100% !important;
         margin: 0 !important;
     }
+}
+
+.outOfStockBadge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #e53935;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+ 
+.outOfStockImg {
+    opacity: 0.45;
+    filter: grayscale(60%);
+}
+ 
+
+.outOfStockBtn {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
+    border: none;
+    opacity: 1 !important;
+}
+ 
+.outOfStockBtn:hover {
+    background-color: #ccc !important;
+    color: #666 !important;
 }

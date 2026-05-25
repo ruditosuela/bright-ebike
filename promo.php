@@ -123,12 +123,19 @@ if (isset($_SESSION['username'])) {
                 <div class="checkoutModalLeft">
                     <?php if ($checkoutUser): ?>
                         <div class="checkoutSection userInfo">
-                            <h3>Customer Information</h3>
-                            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($checkoutUser['full_name']); ?></p>
-                            <p><strong>Contact No.:</strong> <?php echo htmlspecialchars($checkoutUser['contact_no']); ?></p>
-                            <p><strong>Email:</strong> <?php echo htmlspecialchars($checkoutUser['email']); ?></p>
-                            <p><strong>Address:</strong> <?php echo htmlspecialchars($checkoutUser['address']); ?></p>
-                        </div>
+                                <h3>Customer Information</h3>
+                                <p><strong>Full Name:</strong>
+                                    <span id="checkoutFullName"><?php echo htmlspecialchars($checkoutUser['full_name'] ?? ''); ?></span>
+                                </p>
+                                <p><strong>Contact No.:</strong>
+                                    <span id="checkoutContact"><?php echo htmlspecialchars($checkoutUser['contact_no'] ?? ''); ?></span>
+                                </p>
+                                <p><strong>Email:</strong> <?php echo htmlspecialchars($checkoutUser['email'] ?? ''); ?></p>
+                                <p><strong>Address:</strong>
+                                    <span id="checkoutAddress"><?php echo htmlspecialchars($checkoutUser['address'] ?? ''); ?></span>
+                                </p>
+                            </div>
+
                     <?php else: ?>
                         <div class="checkoutSection userInfo">
                             <p>Please <a href="login.php">log in</a> to continue.</p>

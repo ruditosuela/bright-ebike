@@ -203,7 +203,7 @@ if (isset($_SESSION['username'])) {
                 <div class="aboutCard">
 
                     <div class="aboutLeft">
-                        <img src="assets/bright logo2 no bg.png" alt="Logo">
+                        <img src="assets/bright logo2.jpg" alt="Logo">
                     </div>
 
                     <div class="aboutRight">

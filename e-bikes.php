@@ -139,12 +139,18 @@ if (isset($_SESSION['username'])) {
           <div class="checkoutModalLeft">
             <?php if ($checkoutUser): ?>
               <div class="checkoutSection userInfo">
-                <h3>Customer Information</h3>
-                <p><strong>Full Name:</strong> <?php echo htmlspecialchars($checkoutUser['full_name'] ?? ''); ?></p>
-                <p><strong>Contact No.:</strong> <?php echo htmlspecialchars($checkoutUser['contact_no'] ?? ''); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($checkoutUser['email'] ?? ''); ?></p>
-                <p><strong>Address:</strong> <?php echo htmlspecialchars($checkoutUser['address'] ?? ''); ?></p>
-              </div>
+                                <h3>Customer Information</h3>
+                                <p><strong>Full Name:</strong>
+                                    <span id="checkoutFullName"><?php echo htmlspecialchars($checkoutUser['full_name'] ?? ''); ?></span>
+                                </p>
+                                <p><strong>Contact No.:</strong>
+                                    <span id="checkoutContact"><?php echo htmlspecialchars($checkoutUser['contact_no'] ?? ''); ?></span>
+                                </p>
+                                <p><strong>Email:</strong> <?php echo htmlspecialchars($checkoutUser['email'] ?? ''); ?></p>
+                                <p><strong>Address:</strong>
+                                    <span id="checkoutAddress"><?php echo htmlspecialchars($checkoutUser['address'] ?? ''); ?></span>
+                                </p>
+                            </div>
             <?php else: ?>
               <div class="checkoutSection userInfo">
                 <p>Please <a href="login.php">log in</a> to continue.</p>
@@ -216,50 +222,55 @@ if (isset($_SESSION['username'])) {
 
     <div class="ebike-container">
 
-      <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-
+      <?php while ($row = mysqli_fetch_assoc($result)) {
+        $outOfStock = (intval($row['quantity']) <= 0);
+      ?>
+ 
         <div class="ebike-card <?php echo strtolower(explode(' ', $row['category'])[0]); ?>"
           data-brand="<?php echo strtolower(htmlspecialchars($row['brand'] ?? '')); ?>"
           data-price="<?php echo $row['price']; ?>">
-
+ 
           <?php
-          if (!empty($row['image'])) {
-              if (file_exists("uploads/" . $row['image'])) {
-                $imagePath = "uploads/" . $row['image'];
-              } else {
-                $imagePath = "assets/" . $row['image'];
-              }
-          } else {
-            $imagePath = "assets/default-bike.png";
-          }
+          $imagePath = (!empty($row['image'])) ? "assets/" . $row['image'] : "assets/default-bike.png";
           ?>
-          <img src="<?php echo $imagePath; ?>" class="ebike-image">
-
+ 
+          <!-- OUT OF STOCK BADGE -->
+          <?php if ($outOfStock): ?>
+            <div class="outOfStockBadge">Out of Stock</div>
+          <?php endif; ?>
+ 
+          <img src="<?php echo $imagePath; ?>" class="ebike-image <?php echo $outOfStock ? 'outOfStockImg' : ''; ?>">
+ 
           <div class="ebike-info">
             <div class="ebike-name">
               <?php echo $row['product_name']; ?>
             </div>
-
+ 
             <div class="ebike-price">
               ₱<?php echo number_format($row['price'], 2); ?>
             </div>
-
+ 
             <button class="viewSpecs"
               data-name="<?php echo htmlspecialchars($row['product_name'] ?? ''); ?>"
               data-specs="<?php echo htmlspecialchars($row['specifications'] ?? 'No specifications available.'); ?>">
               SPECIFICATIONS
             </button>
-
-            <button class="addToCart"
-              data-id="<?php echo $row['product_id']; ?>"
-              data-name="<?php echo $row['product_name']; ?>"
-              data-price="<?php echo $row['price']; ?>">
-              ADD TO CART
-            </button>
+ 
+            <?php if ($outOfStock): ?>
+              <button class="addToCart outOfStockBtn" disabled>OUT OF STOCK</button>
+            <?php else: ?>
+              <button class="addToCart"
+                data-id="<?php echo $row['product_id']; ?>"
+                data-name="<?php echo $row['product_name']; ?>"
+                data-price="<?php echo $row['price']; ?>">
+                ADD TO CART
+              </button>
+            <?php endif; ?>
+ 
           </div>
-
+ 
         </div>
-
+ 
       <?php } ?>
 
     </div>

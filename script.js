@@ -363,9 +363,22 @@ function openGcashApp() {
 const placeOrderBtn = document.getElementById("placeOrderBtn");
 if (placeOrderBtn) {
     placeOrderBtn.addEventListener("click", () => {
- 
+
         if (cart.length === 0) {
             alert("Cart is empty!");
+            return;
+        }
+
+        // ── CHECK INCOMPLETE PROFILE ──────────────────────────────
+        const fullName  = document.getElementById('checkoutFullName')?.innerText.trim();
+        const contactNo = document.getElementById('checkoutContact')?.innerText.trim();
+        const address   = document.getElementById('checkoutAddress')?.innerText.trim();
+
+
+        if (!fullName || !contactNo || !address) {
+            closeCheckoutModal();
+            alert("Please complete your profile (Full Name, Contact No., and Address) in Account Details before placing an order.");
+            window.location.href = "accountDetails.php";
             return;
         }
  
